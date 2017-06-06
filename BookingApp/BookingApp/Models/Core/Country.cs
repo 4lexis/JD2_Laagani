@@ -13,50 +13,63 @@ using System.IO;
 
 
 
-using System;
-namespace System {
-	public class Country {
+namespace BookingApp.Models
+{
+    public class Country
+    {
 
-		private int code;
-		private int id;
-		private string name;
-		public List<Region> m_Region;
+        private int code;
+        private int id;
+        private string name;
 
-		public Country(){
+        public List<Region> m_Region;
 
-		}
+        public Country()
+        {
 
-		~Country(){
+        }
 
-		}
+        ~Country()
+        {
 
-		public int Code{
-			get{
-				return code;
-			}
-			set{
-				code = value;
-			}
-		}
+        }
 
-		public int Id{
-			get{
-				return id;
-			}
-			set{
-				id = value;
-			}
-		}
+        public int Code
+        {
+            get
+            {
+                return code;
+            }
+            set
+            {
+                code = value;
+            }
+        }
 
-		public string Name{
-			get{
-				return name;
-			}
-			set{
-				name = value;
-			}
-		}
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
-	}//end Country
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+
+    }//end Country
 
 }//end namespace System

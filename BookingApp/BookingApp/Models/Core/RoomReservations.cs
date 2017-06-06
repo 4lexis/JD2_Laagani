@@ -11,56 +11,70 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
-
-using System;
-using BookingApp.Models;
-
-namespace System {
-	public class RoomReservations {
+namespace BookingApp.Models
+{
+    public class RoomReservations
+    {
 
         public int Id { get; set; }
-		private DateTime? endDate;
-		private DateTime? startDate;
-		private DateTime? timestamp;
-		public AppUser User;
-		public Room Room;
+        private DateTime? endDate;
+        private DateTime? startDate;
+        private DateTime? timestamp;
 
-		public RoomReservations(){
+        /// <summary>
+        /// Foreign key of user
+        /// </summary>
+        [ForeignKey("User")]
+        public int RefUser { get; set; }
 
-		}
+        /// <summary>
+        /// Foreign key of room
+        /// </summary>
+        [ForeignKey("Room")]
+        public int RefRoom { get; set; }
 
-		~RoomReservations(){
+        public RoomReservations()
+        {
 
-		}
+        }
 
-		public DateTime? EndDate{
-			get{
-				return endDate;
-			}
-			set{
-				endDate = value;
-			}
-		}
 
-		public DateTime? StartDate{
-			get{
-				return startDate;
-			}
-			set{
-				startDate = value;
-			}
-		}
+        public DateTime? EndDate
+        {
+            get
+            {
+                return endDate;
+            }
+            set
+            {
+                endDate = value;
+            }
+        }
 
-		public DateTime? Timestamp{
-			get{
+        public DateTime? StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                startDate = value;
+            }
+        }
+
+        public DateTime? Timestamp
+        {
+            get
+            {
                 return timestamp;
-			}
-			set{
-				timestamp = value;
-			}
-		}
+            }
+            set
+            {
+                timestamp = value;
+            }
+        }
 
-	}//end RoomReservations
+    }//end RoomReservations
 
 }//end namespace System

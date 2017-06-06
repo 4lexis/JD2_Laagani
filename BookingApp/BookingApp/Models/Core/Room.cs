@@ -11,72 +11,91 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+namespace BookingApp.Models
+{
+    public class Room
+    {
+
+        private int bedCount;
+        private string description;
+        private int id;
+        private int pricePerNight;
+        private int roomNumber;
+
+        public List<RoomReservations> m_RoomReservations;
+
+        /// <summary>
+        /// Foreign key of accommodation
+        /// </summary>
+        [ForeignKey("Accomodation")]
+        public int RefAcc { get; set; }
 
 
-using System;
-namespace System {
-	public class Room {
+        public Room()
+        {
 
-		private int bedCount;
-		private string description;
-		private int id;
-		private int pricePerNight;
-		private int roomNumber;
-		public List<RoomReservations> m_RoomReservations;
+        }
 
-		public Room(){
+        public int BedCount
+        {
+            get
+            {
+                return bedCount;
+            }
+            set
+            {
+                bedCount = value;
+            }
+        }
 
-		}
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
 
-		~Room(){
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
-		}
+        public int PricePerNight
+        {
+            get
+            {
+                return pricePerNight;
+            }
+            set
+            {
+                pricePerNight = value;
+            }
+        }
 
-		public int BedCount{
-			get{
-				return bedCount;
-			}
-			set{
-				bedCount = value;
-			}
-		}
+        public int RoomNumber
+        {
+            get
+            {
+                return roomNumber;
+            }
+            set
+            {
+                roomNumber = value;
+            }
+        }
 
-		public string Description{
-			get{
-				return description;
-			}
-			set{
-				description = value;
-			}
-		}
-
-		public int Id{
-			get{
-				return id;
-			}
-			set{
-				id = value;
-			}
-		}
-
-		public int PricePerNight{
-			get{
-				return pricePerNight;
-			}
-			set{
-				pricePerNight = value;
-			}
-		}
-
-		public int RoomNumber{
-			get{
-				return roomNumber;
-			}
-			set{
-				roomNumber = value;
-			}
-		}
-
-	}//end Room
+    }//end Room
 
 }//end namespace System

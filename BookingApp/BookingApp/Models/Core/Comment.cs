@@ -10,47 +10,60 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
-
-using System;
-using BookingApp.Models;
-
-namespace System {
-	public class Comment {
+namespace BookingApp.Models
+{
+    public class Comment
+    {
 
         public int Id { get; set; }
-		private int grade;
-		private string text;
-		public AppUser User;
-		public Accommodation Accommodation;
+        private int grade;
+        private string text;
 
-		public Comment(){
+        /// <summary>
+        /// Foreign key of accommodation
+        /// </summary>
+        [ForeignKey("User")]
+        public int Refuser { get; set; }
 
-		}
+        /// <summary>
+        /// Foreign key of accommodation
+        /// </summary>
+        [ForeignKey("Accomodation")]
+        public int RefAcc { get; set; }
 
-		~Comment(){
+        public Comment()
+        {
 
-		}
+        }
 
-		public int Grade{
-			get{
-				return grade;
-			}
-			set{
-				grade = value;
-			}
-		}
+        public int Grade
+        {
+            get
+            {
+                return grade;
+            }
+            set
+            {
+                grade = value;
+            }
+        }
 
-		public string Text{
-			get{
-				return text;
-			}
-			set{
-				text = value;
-			}
-		}
+        public string Text
+        {
+            get
+            {
+                return text;
+            }
+            set
+            {
+                text = value;
+            }
+        }
 
-	}//end Comment
+    }//end Comment
 
 }//end namespace System
