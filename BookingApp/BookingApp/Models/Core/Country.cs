@@ -48,7 +48,7 @@ namespace System {
 			}
 		}
 
-		public int Name{
+		public string Name{
 			get{
 				return name;
 			}

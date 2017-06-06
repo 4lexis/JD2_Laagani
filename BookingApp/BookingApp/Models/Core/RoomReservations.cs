@@ -14,14 +14,17 @@ using System.IO;
 
 
 using System;
+using BookingApp.Models;
+
 namespace System {
 	public class RoomReservations {
 
-		private string endDate;
-		private string startDate;
-		private Time timestamp;
-		public List<User> m_User;
-		public List<Room> m_Room;
+        public int Id { get; set; }
+		private DateTime? endDate;
+		private DateTime? startDate;
+		private DateTime? timestamp;
+		public AppUser User;
+		public Room Room;
 
 		public RoomReservations(){
 
@@ -31,7 +34,7 @@ namespace System {
 
 		}
 
-		public string EndDate{
+		public DateTime? EndDate{
 			get{
 				return endDate;
 			}
@@ -40,7 +43,7 @@ namespace System {
 			}
 		}
 
-		public string StartDate{
+		public DateTime? StartDate{
 			get{
 				return startDate;
 			}
@@ -49,9 +52,9 @@ namespace System {
 			}
 		}
 
-		public Time Timestamp{
+		public DateTime? Timestamp{
 			get{
-				return timestamp;
+                return timestamp;
 			}
 			set{
 				timestamp = value;

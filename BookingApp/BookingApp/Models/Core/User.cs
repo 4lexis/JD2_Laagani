@@ -53,19 +53,19 @@ namespace System {
 
 		public string Password{
 			get{
-				return Password;
+				return password;
 			}
 			set{
-				Password = value;
+				password = value;
 			}
 		}
 
 		public string Username{
 			get{
-				return Username;
+				return username;
 			}
 			set{
-				Username = value;
+				username = value;
 			}
 		}
 
