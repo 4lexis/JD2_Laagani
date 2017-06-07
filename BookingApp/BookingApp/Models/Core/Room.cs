@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingApp.Models
 {
@@ -27,9 +29,10 @@ namespace BookingApp.Models
         /// <summary>
         /// Foreign key of accommodation
         /// </summary>
-        [ForeignKey("Accomodation")]
+        [ForeignKey("Accommodation")]
         public int RefAcc { get; set; }
 
+        public Accommodation Accommodation { get; set; }
 
         public Room()
         {

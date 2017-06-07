@@ -27,13 +27,17 @@ namespace BookingApp.Models
         /// Foreign key of accommodation
         /// </summary>
         [ForeignKey("User")]
-        public int Refuser { get; set; }
+        public int RefUser { get; set; }
+
+        public User User { get; set; }
 
         /// <summary>
         /// Foreign key of accommodation
         /// </summary>
-        [ForeignKey("Accomodation")]
+        [ForeignKey("Accommodation")]
         public int RefAcc { get; set; }
+
+        public Accommodation Accommodation { get; set; }
 
         public Comment()
         {

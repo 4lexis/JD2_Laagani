@@ -29,11 +29,6 @@ namespace BookingApp.Models
 
         }
 
-        ~Country()
-        {
-
-        }
-
         public int Code
         {
             get

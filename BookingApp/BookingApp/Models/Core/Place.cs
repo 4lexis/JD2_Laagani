@@ -30,6 +30,8 @@ namespace BookingApp.Models
         [ForeignKey("Region")]
         public int RefRegion { get; set; }
 
+        public Region Region { get; set; }
+
 
         public Place()
         {

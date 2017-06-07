@@ -39,6 +39,7 @@ namespace BookingApp.Models
         [ForeignKey("Place")]
         public int RefPlace { get; set; }
 
+        public Place Place { get; set; }
 
         /// <summary>
         /// Foreign key of user
@@ -46,12 +47,15 @@ namespace BookingApp.Models
         [ForeignKey("User")]
         public int RefUser { get; set; }
 
+        public User User { get; set; }
 
         /// <summary>
         /// Foreign key of accomodation type
         /// </summary>
         [ForeignKey("AType")]
         public int RefAType { get; set; }
+
+        public AccommodationType AType { get; set; }
 
 
         public Accommodation()

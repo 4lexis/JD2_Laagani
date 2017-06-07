@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace BookingApp.Models
@@ -27,6 +29,8 @@ namespace BookingApp.Models
         /// </summary>
         [ForeignKey("Country")]
         public int RefCountry { get; set; }
+
+        public Country Country { get; set; }
 
         public Region()
         {
