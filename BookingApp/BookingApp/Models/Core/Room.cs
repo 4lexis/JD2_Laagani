@@ -10,73 +10,95 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace BookingApp.Models
+{
+    public class Room
+    {
 
+        private int bedCount;
+        private string description;
+        private int id;
+        private int pricePerNight;
+        private int roomNumber;
 
-using System;
-namespace System {
-	public class Room {
+        public List<RoomReservations> m_RoomReservations;
 
-		private int bedCount;
-		private string description;
-		private int id;
-		private int pricePerNight;
-		private int roomNumber;
-		public List<RoomReservations> m_RoomReservations;
+        /// <summary>
+        /// Foreign key of accommodation
+        /// </summary>
+        [ForeignKey("Accommodation")]
+        public int RefAcc { get; set; }
 
-		public Room(){
+        public Accommodation Accommodation { get; set; }
 
-		}
+        public Room()
+        {
 
-		~Room(){
+        }
 
-		}
+        public int BedCount
+        {
+            get
+            {
+                return bedCount;
+            }
+            set
+            {
+                bedCount = value;
+            }
+        }
 
-		public int BedCount{
-			get{
-				return bedCount;
-			}
-			set{
-				bedCount = value;
-			}
-		}
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
 
-		public string Description{
-			get{
-				return description;
-			}
-			set{
-				description = value;
-			}
-		}
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
-		public int Id{
-			get{
-				return id;
-			}
-			set{
-				id = value;
-			}
-		}
+        public int PricePerNight
+        {
+            get
+            {
+                return pricePerNight;
+            }
+            set
+            {
+                pricePerNight = value;
+            }
+        }
 
-		public int PricePerNight{
-			get{
-				return pricePerNight;
-			}
-			set{
-				pricePerNight = value;
-			}
-		}
+        public int RoomNumber
+        {
+            get
+            {
+                return roomNumber;
+            }
+            set
+            {
+                roomNumber = value;
+            }
+        }
 
-		public int RoomNumber{
-			get{
-				return roomNumber;
-			}
-			set{
-				roomNumber = value;
-			}
-		}
-
-	}//end Room
+    }//end Room
 
 }//end namespace System

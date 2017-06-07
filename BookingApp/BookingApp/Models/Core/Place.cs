@@ -10,43 +10,59 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
+namespace BookingApp.Models
+{
+    public class Place
+    {
 
-using System;
-namespace System {
-	public class Place {
+        private int id;
+        private string name;
 
-		private int id;
-		private string name;
-		public List<Accommodation> m_Accommodation;
+        public List<Accommodation> m_Accommodation;
 
-		public Place(){
+        /// <summary>
+        /// Foreign key of region
+        /// </summary>
+        [ForeignKey("Region")]
+        public int RefRegion { get; set; }
 
-		}
+        public Region Region { get; set; }
 
-		~Place(){
 
-		}
+        public Place()
+        {
 
-		public int Id{
-			get{
-				return id;
-			}
-			set{
-				id = value;
-			}
-		}
+        }
 
-		public string Name{
-			get{
-				return name;
-			}
-			set{
-				name = value;
-			}
-		}
 
-	}//end Place
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+
+    }//end Place
 
 }//end namespace System

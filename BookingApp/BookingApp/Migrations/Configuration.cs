@@ -125,8 +125,8 @@ namespace BookingApp.Migrations
             region.m_Place.Add(place);
             country.m_Region.Add(region);
             acctype.m_Accommodation.Add(acc);
-            comment.Accommodation = acc;
-            comment.User = user1;
+           // comment.Accommodation = acc;
+            //comment.User = user1;
             user1.m_Accommodation.Add(acc);
             user1.m_Comment.Add(comment);
             user1.m_RoomReservations.Add(rez);
@@ -139,8 +139,6 @@ namespace BookingApp.Migrations
             context.Regions.Add(region);
             context.Rooms.Add(room);
             context.RoomReservationss.Add(rez);
-            
-            
         }
     }
 }

@@ -11,42 +11,47 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+namespace BookingApp.Models
+{
+    public class AccommodationType
+    {
+
+        private int id;
+        private string name;
+
+        public List<Accommodation> m_Accommodation;
 
 
-using System;
-namespace System {
-	public class AccommodationType {
 
-		private int id;
-		private string name;
-		public List<Accommodation> m_Accommodation;
+        public AccommodationType()
+        {
 
-		public AccommodationType(){
+        }
 
-		}
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
-		~AccommodationType(){
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
 
-		}
-
-		public int Id{
-			get{
-				return id;
-			}
-			set{
-				id = value;
-			}
-		}
-
-		public string Name{
-			get{
-				return name;
-			}
-			set{
-				name = value;
-			}
-		}
-
-	}//end AccommodationType
+    }//end AccommodationType
 
 }//end namespace System
