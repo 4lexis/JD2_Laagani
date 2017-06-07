@@ -23,20 +23,10 @@ namespace BookingApp.Models
         private int grade;
         private string text;
 
-        /// <summary>
-        /// Foreign key of accommodation
-        /// </summary>
-        [ForeignKey("User")]
-        public int RefUser { get; set; }
+        [Required]     
+        public AppUser User { get; set; }
 
-        public User User { get; set; }
-
-        /// <summary>
-        /// Foreign key of accommodation
-        /// </summary>
-        [ForeignKey("Accommodation")]
-        public int RefAcc { get; set; }
-
+        [Required]
         public Accommodation Accommodation { get; set; }
 
         public Comment()

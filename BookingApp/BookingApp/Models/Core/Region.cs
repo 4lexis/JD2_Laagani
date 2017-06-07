@@ -24,12 +24,7 @@ namespace BookingApp.Models
 
         public List<Place> m_Place;
 
-        /// <summary>
-        /// Foreign key of country
-        /// </summary>
-        [ForeignKey("Country")]
-        public int RefCountry { get; set; }
-
+        [Required]
         public Country Country { get; set; }
 
         public Region()

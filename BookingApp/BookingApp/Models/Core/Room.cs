@@ -26,12 +26,7 @@ namespace BookingApp.Models
 
         public List<RoomReservations> m_RoomReservations;
 
-        /// <summary>
-        /// Foreign key of accommodation
-        /// </summary>
-        [ForeignKey("Accommodation")]
-        public int RefAcc { get; set; }
-
+        [Required]
         public Accommodation Accommodation { get; set; }
 
         public Room()
