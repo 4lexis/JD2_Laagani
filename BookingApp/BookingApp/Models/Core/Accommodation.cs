@@ -32,8 +32,6 @@ namespace BookingApp.Models
 
         public List<Room> m_Room;
 
-
-       
         [Required]
         public Place Place { get; set; }
 
@@ -48,7 +46,8 @@ namespace BookingApp.Models
 
         public Accommodation()
         {
-
+            m_Comment = new List<Comment>();
+            m_Room = new List<Room>();
         }
 
         ~Accommodation()

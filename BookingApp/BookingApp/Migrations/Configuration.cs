@@ -1,9 +1,10 @@
-using BookingApp.Models;
+
 
 namespace BookingApp.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -68,6 +69,7 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user.Id, "Admin");
             }
 
+            /*
             AppUser user1 = new AppUser();
             user1.Email = "mail@gmail.com";
             user1.Id = 0;
@@ -139,6 +141,20 @@ namespace BookingApp.Migrations
             context.Regions.Add(region);
             context.Rooms.Add(room);
             context.RoomReservationss.Add(rez);
+            */
+
+            AccommodationType acctype = new AccommodationType();
+            acctype.Id = 88;
+            acctype.Name = "Buras";
+
+            AppUser user1 = new AppUser();
+            user1.Email = "mail@gmail.com";
+            user1.Id = 0;
+            user1.Password = "pass";
+            user1.Username = "user";
+
+            context.AccommodationsTypes.Add(acctype);
+            context.AppUsers.Add(user1);
         }
     }
 }

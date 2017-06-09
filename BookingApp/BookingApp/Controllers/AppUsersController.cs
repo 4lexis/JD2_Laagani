@@ -9,48 +9,47 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookingApp.Controllers
 {
-    public class UsersController : ApiController
+    public class AppUsersController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Users
-        public IQueryable<AppUser> GetUsers()
+        // GET: api/AppUsers
+        public IQueryable<AppUser> GetAppUsers()
         {
             return db.AppUsers;
         }
 
-        // GET: api/Users/5
+        // GET: api/AppUsers/5
         [ResponseType(typeof(AppUser))]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetAppUser(int id)
         {
-            AppUser user = db.AppUsers.Find(id);
-            if (user == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(appUser);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/AppUsers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, AppUser user)
+        public IHttpActionResult PutAppUser(int id, AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.Id)
+            if (id != appUser.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(appUser).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +57,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!AppUserExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
+        // POST: api/AppUsers
         [ResponseType(typeof(AppUser))]
-        public IHttpActionResult PostUser(AppUser user)
+        public IHttpActionResult PostAppUser(AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AppUsers.Add(user);
+            db.AppUsers.Add(appUser);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+            return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/AppUsers/5
         [ResponseType(typeof(AppUser))]
-        public IHttpActionResult DeleteUser(int id)
+        public IHttpActionResult DeleteAppUser(int id)
         {
-            AppUser user = db.AppUsers.Find(id);
-            if (user == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            db.AppUsers.Remove(user);
+            db.AppUsers.Remove(appUser);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(appUser);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,7 +110,7 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool AppUserExists(int id)
         {
             return db.AppUsers.Count(e => e.Id == id) > 0;
         }

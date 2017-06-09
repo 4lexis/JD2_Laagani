@@ -31,7 +31,7 @@ namespace BookingApp.Models
 
         public Room()
         {
-
+            m_RoomReservations = new List<RoomReservations>();
         }
 
         public int BedCount

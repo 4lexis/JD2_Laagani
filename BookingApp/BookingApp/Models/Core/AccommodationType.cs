@@ -25,7 +25,7 @@ namespace BookingApp.Models
 
         public AccommodationType()
         {
-
+            m_Accommodation = new List<Accommodation>();
         }
 
         public int Id

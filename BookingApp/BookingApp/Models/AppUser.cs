@@ -17,12 +17,9 @@ namespace BookingApp.Models
 
         public AppUser()
         {
-
-        }
-
-        ~AppUser()
-        {
-
+            m_RoomReservations = new List<RoomReservations>();
+            m_Accommodation = new List<Accommodation>();
+            m_Comment = new List<Comment>();
         }
 
         public string Email

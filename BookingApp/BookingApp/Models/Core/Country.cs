@@ -26,7 +26,7 @@ namespace BookingApp.Models
 
         public Country()
         {
-
+            m_Region = new List<Region>();
         }
 
         public int Code
