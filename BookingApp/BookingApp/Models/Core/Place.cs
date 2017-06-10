@@ -30,7 +30,7 @@ namespace BookingApp.Models
 
         public Place()
         {
-
+            m_Accommodation = new List<Accommodation>();
         }
 
 

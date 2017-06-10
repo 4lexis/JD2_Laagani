@@ -29,7 +29,7 @@ namespace BookingApp.Models
 
         public Region()
         {
-
+            m_Place = new List<Place>();
         }
 
 
