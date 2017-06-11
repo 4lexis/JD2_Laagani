@@ -21,30 +21,29 @@ namespace BookingApp.Controllers.OData
     using System.Web.Http.OData.Extensions;
     using BookingApp.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Room>("Rooms");
-    builder.EntitySet<Accommodation>("Accommodations"); 
+    builder.EntitySet<Country>("Countries");
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class RoomsController : ODataController
+    public class OCountriesController : ODataController
     {
         private BAContext db = new BAContext();
 
-        // GET: odata/Rooms
+        // GET: odata/Countries
         [EnableQuery]
-        public IQueryable<Room> GetRooms()
+        public IQueryable<Country> GetCountries()
         {
-            return db.Rooms;
+            return db.Countries;
         }
 
-        // GET: odata/Rooms(5)
+        // GET: odata/Countries(5)
         [EnableQuery]
-        public SingleResult<Room> GetRoom([FromODataUri] int key)
+        public SingleResult<Country> GetCountry([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Rooms.Where(room => room.Id == key));
+            return SingleResult.Create(db.Countries.Where(country => country.Id == key));
         }
 
-        // PUT: odata/Rooms(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Room> patch)
+        // PUT: odata/Countries(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Country> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +52,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            Room room = db.Rooms.Find(key);
-            if (room == null)
+            Country country = db.Countries.Find(key);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            patch.Put(room);
+            patch.Put(country);
 
             try
             {
@@ -67,7 +66,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(key))
+                if (!CountryExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +76,26 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(room);
+            return Updated(country);
         }
 
-        // POST: odata/Rooms
-        public IHttpActionResult Post(Room room)
+        // POST: odata/Countries
+        public IHttpActionResult Post(Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Rooms.Add(room);
+            db.Countries.Add(country);
             db.SaveChanges();
 
-            return Created(room);
+            return Created(country);
         }
 
-        // PATCH: odata/Rooms(5)
+        // PATCH: odata/Countries(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Room> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Country> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +104,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            Room room = db.Rooms.Find(key);
-            if (room == null)
+            Country country = db.Countries.Find(key);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(room);
+            patch.Patch(country);
 
             try
             {
@@ -119,7 +118,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(key))
+                if (!CountryExists(key))
                 {
                     return NotFound();
                 }
@@ -129,29 +128,22 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(room);
+            return Updated(country);
         }
 
-        // DELETE: odata/Rooms(5)
+        // DELETE: odata/Countries(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Room room = db.Rooms.Find(key);
-            if (room == null)
+            Country country = db.Countries.Find(key);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            db.Rooms.Remove(room);
+            db.Countries.Remove(country);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // GET: odata/Rooms(5)/Accommodation
-        [EnableQuery]
-        public SingleResult<Accommodation> GetAccommodation([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Rooms.Where(m => m.Id == key).Select(m => m.Accommodation));
         }
 
         protected override void Dispose(bool disposing)
@@ -163,9 +155,9 @@ namespace BookingApp.Controllers.OData
             base.Dispose(disposing);
         }
 
-        private bool RoomExists(int key)
+        private bool CountryExists(int key)
         {
-            return db.Rooms.Count(e => e.Id == key) > 0;
+            return db.Countries.Count(e => e.Id == key) > 0;
         }
     }
 }

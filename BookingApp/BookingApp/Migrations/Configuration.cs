@@ -30,7 +30,7 @@ namespace BookingApp.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+            //            
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -69,27 +69,38 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user.Id, "Admin");
             }
 
-            /*
+            AccommodationType acctype = new AccommodationType();
+            acctype.Id = 88;
+            acctype.Name = "Buras";
+
             AppUser user1 = new AppUser();
             user1.Email = "mail@gmail.com";
             user1.Id = 0;
-            user1.Password = "#$%123";
-            user1.Username = "haxn00b";            
+            user1.Password = "pass";
+            user1.Username = "user";
 
-            Room room = new Room();
-            room.BedCount = 1;
-            room.Description = "asd";
-            room.Id = 2;
-            room.PricePerNight = 23;
-            room.RoomNumber = 7;
+            Country country = new Country();
+            country.Code = 123854;
+            country.Id = 13;
+            country.Name = "Srbija";
             
+
             Place place = new Place();
             place.Id = 2;
             place.Name = "Mesto";
 
-            Comment comment = new Comment();
-            comment.Grade = 3;
-            comment.Text = "awe";
+            Region region = new Region();
+            region.Id = 5;
+            region.Name = "Area55";
+            region.m_Place.Add(place);
+            region.Country = country;
+
+            place.Region = region;
+
+            context.Countries.Add(country);
+            context.Places.Add(place);            
+            context.AccommodationsTypes.Add(acctype);
+            context.AppUsers.Add(user1);
 
             Accommodation acc = new Accommodation();
             acc.Address = "Addr";
@@ -101,60 +112,47 @@ namespace BookingApp.Migrations
             acc.Longitude = 23.25;
             acc.Name = "Delux";
             acc.ImageURL = "url";
+            acc.Place = place;
+            acc.AType = acctype;
+            //acc.m_Comment.Add(new Comment());
+            //acc.m_Room.Add(new Room());
+            acc.User = user1;
+            context.Accommodations.Add(acc);
 
-            Country country = new Country();
-            country.Code = 123854;
-            country.Id = 13;
-            country.Name = "Srbija";
+            Comment comment = new Comment();
+            comment.Grade = 3;
+            comment.Text = "awe";
+            comment.Accommodation = acc;
+            comment.User = user1;
 
-            Region region = new Region();
-            region.Id = 5;
-            region.Name = "Area55";
+            context.Comments.Add(comment);
+
+            Room room = new Room();
+            room.BedCount = 3;
+            room.Description = "DarkRoom Hehe";            
+            room.PricePerNight = 23;
+            room.RoomNumber = 7;
+            room.Accommodation = acc;
+
+            context.Rooms.Add(room);
 
             RoomReservations rez = new RoomReservations();
             rez.StartDate = DateTime.Now;
             rez.EndDate = DateTime.Now;
             rez.Timestamp = DateTime.Now;
+            rez.Room = room;
+            rez.User = user1;
 
-            AccommodationType acctype = new AccommodationType();
-            acctype.Id = 88;
-            acctype.Name = "Buras";
-
-            room.m_RoomReservations.Add(rez);
-            acc.m_Comment.Add(comment);
-            acc.m_Room.Add(room);
-            place.m_Accommodation.Add(acc);
-            region.m_Place.Add(place);
-            country.m_Region.Add(region);
-            acctype.m_Accommodation.Add(acc);
-           // comment.Accommodation = acc;
-            //comment.User = user1;
-            user1.m_Accommodation.Add(acc);
-            user1.m_Comment.Add(comment);
-            user1.m_RoomReservations.Add(rez);
-                                    
-            context.Accommodations.Add(acc);
-            context.AccommodationsTypes.Add(acctype);
-            context.Comments.Add(comment);
-            context.Countries.Add(country);
-            context.Places.Add(place);
-            context.Regions.Add(region);
-            context.Rooms.Add(room);
             context.RoomReservationss.Add(rez);
-            */
-
-            AccommodationType acctype = new AccommodationType();
-            acctype.Id = 88;
-            acctype.Name = "Buras";
-
-            AppUser user1 = new AppUser();
-            user1.Email = "mail@gmail.com";
-            user1.Id = 0;
-            user1.Password = "pass";
-            user1.Username = "user";
-
-            context.AccommodationsTypes.Add(acctype);
-            context.AppUsers.Add(user1);
+            
+            if (!context.Users.Any(u => u.UserName == "ja"))
+            {                    
+            var _appUser = context.AppUsers.FirstOrDefault(a => a.Email == "ja@mailinator.com");
+            var user3 = new BAIdentityUser() { Id = "ja", UserName = "ja", Email = "ja@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("ja") };
+            userManager.Create(user3);
+            userManager.AddToRole(user3.Id, "AppUser");
+            }
+            
         }
     }
 }

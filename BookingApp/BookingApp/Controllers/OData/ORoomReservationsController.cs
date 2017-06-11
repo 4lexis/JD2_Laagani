@@ -21,30 +21,31 @@ namespace BookingApp.Controllers.OData
     using System.Web.Http.OData.Extensions;
     using BookingApp.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Place>("Places");
-    builder.EntitySet<Region>("Regions"); 
+    builder.EntitySet<RoomReservations>("RoomReservations");
+    builder.EntitySet<Room>("Rooms"); 
+    builder.EntitySet<AppUser>("AppUsers"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class PlacesController : ODataController
+    public class ORoomReservationsController : ODataController
     {
         private BAContext db = new BAContext();
 
-        // GET: odata/Places
+        // GET: odata/RoomReservations
         [EnableQuery]
-        public IQueryable<Place> GetPlaces()
+        public IQueryable<RoomReservations> GetRoomReservations()
         {
-            return db.Places;
+            return db.RoomReservationss;
         }
 
-        // GET: odata/Places(5)
+        // GET: odata/RoomReservations(5)
         [EnableQuery]
-        public SingleResult<Place> GetPlace([FromODataUri] int key)
+        public SingleResult<RoomReservations> GetRoomReservations([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Places.Where(place => place.Id == key));
+            return SingleResult.Create(db.RoomReservationss.Where(roomReservations => roomReservations.Id == key));
         }
 
-        // PUT: odata/Places(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Place> patch)
+        // PUT: odata/RoomReservations(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<RoomReservations> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +54,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            Place place = db.Places.Find(key);
-            if (place == null)
+            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            if (roomReservations == null)
             {
                 return NotFound();
             }
 
-            patch.Put(place);
+            patch.Put(roomReservations);
 
             try
             {
@@ -67,7 +68,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlaceExists(key))
+                if (!RoomReservationsExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +78,26 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(place);
+            return Updated(roomReservations);
         }
 
-        // POST: odata/Places
-        public IHttpActionResult Post(Place place)
+        // POST: odata/RoomReservations
+        public IHttpActionResult Post(RoomReservations roomReservations)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Places.Add(place);
+            db.RoomReservationss.Add(roomReservations);
             db.SaveChanges();
 
-            return Created(place);
+            return Created(roomReservations);
         }
 
-        // PATCH: odata/Places(5)
+        // PATCH: odata/RoomReservations(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Place> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<RoomReservations> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +106,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            Place place = db.Places.Find(key);
-            if (place == null)
+            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            if (roomReservations == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(place);
+            patch.Patch(roomReservations);
 
             try
             {
@@ -119,7 +120,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlaceExists(key))
+                if (!RoomReservationsExists(key))
                 {
                     return NotFound();
                 }
@@ -129,29 +130,36 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(place);
+            return Updated(roomReservations);
         }
 
-        // DELETE: odata/Places(5)
+        // DELETE: odata/RoomReservations(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Place place = db.Places.Find(key);
-            if (place == null)
+            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            if (roomReservations == null)
             {
                 return NotFound();
             }
 
-            db.Places.Remove(place);
+            db.RoomReservationss.Remove(roomReservations);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Places(5)/Region
+        // GET: odata/RoomReservations(5)/Room
         [EnableQuery]
-        public SingleResult<Region> GetRegion([FromODataUri] int key)
+        public SingleResult<Room> GetRoom([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Places.Where(m => m.Id == key).Select(m => m.Region));
+            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.Room));
+        }
+
+        // GET: odata/RoomReservations(5)/User
+        [EnableQuery]
+        public SingleResult<AppUser> GetUser([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.User));
         }
 
         protected override void Dispose(bool disposing)
@@ -163,9 +171,9 @@ namespace BookingApp.Controllers.OData
             base.Dispose(disposing);
         }
 
-        private bool PlaceExists(int key)
+        private bool RoomReservationsExists(int key)
         {
-            return db.Places.Count(e => e.Id == key) > 0;
+            return db.RoomReservationss.Count(e => e.Id == key) > 0;
         }
     }
 }

@@ -21,29 +21,30 @@ namespace BookingApp.Controllers.OData
     using System.Web.Http.OData.Extensions;
     using BookingApp.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<AccommodationType>("AccommodationTypes");
+    builder.EntitySet<Region>("Regions");
+    builder.EntitySet<Country>("Countries"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class AccommodationTypesController : ODataController
+    public class ORegionsController : ODataController
     {
         private BAContext db = new BAContext();
 
-        // GET: odata/AccommodationTypes
+        // GET: odata/Regions
         [EnableQuery]
-        public IQueryable<AccommodationType> GetAccommodationTypes()
+        public IQueryable<Region> GetRegions()
         {
-            return db.AccommodationsTypes;
+            return db.Regions;
         }
 
-        // GET: odata/AccommodationTypes(5)
+        // GET: odata/Regions(5)
         [EnableQuery]
-        public SingleResult<AccommodationType> GetAccommodationType([FromODataUri] int key)
+        public SingleResult<Region> GetRegion([FromODataUri] int key)
         {
-            return SingleResult.Create(db.AccommodationsTypes.Where(accommodationType => accommodationType.Id == key));
+            return SingleResult.Create(db.Regions.Where(region => region.Id == key));
         }
 
-        // PUT: odata/AccommodationTypes(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<AccommodationType> patch)
+        // PUT: odata/Regions(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Region> patch)
         {
             Validate(patch.GetEntity());
 
@@ -52,13 +53,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
-            if (accommodationType == null)
+            Region region = db.Regions.Find(key);
+            if (region == null)
             {
                 return NotFound();
             }
 
-            patch.Put(accommodationType);
+            patch.Put(region);
 
             try
             {
@@ -66,7 +67,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationTypeExists(key))
+                if (!RegionExists(key))
                 {
                     return NotFound();
                 }
@@ -76,26 +77,26 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(accommodationType);
+            return Updated(region);
         }
 
-        // POST: odata/AccommodationTypes
-        public IHttpActionResult Post(AccommodationType accommodationType)
+        // POST: odata/Regions
+        public IHttpActionResult Post(Region region)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AccommodationsTypes.Add(accommodationType);
+            db.Regions.Add(region);
             db.SaveChanges();
 
-            return Created(accommodationType);
+            return Created(region);
         }
 
-        // PATCH: odata/AccommodationTypes(5)
+        // PATCH: odata/Regions(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<AccommodationType> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Region> patch)
         {
             Validate(patch.GetEntity());
 
@@ -104,13 +105,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
-            if (accommodationType == null)
+            Region region = db.Regions.Find(key);
+            if (region == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(accommodationType);
+            patch.Patch(region);
 
             try
             {
@@ -118,7 +119,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationTypeExists(key))
+                if (!RegionExists(key))
                 {
                     return NotFound();
                 }
@@ -128,22 +129,29 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(accommodationType);
+            return Updated(region);
         }
 
-        // DELETE: odata/AccommodationTypes(5)
+        // DELETE: odata/Regions(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
-            if (accommodationType == null)
+            Region region = db.Regions.Find(key);
+            if (region == null)
             {
                 return NotFound();
             }
 
-            db.AccommodationsTypes.Remove(accommodationType);
+            db.Regions.Remove(region);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/Regions(5)/Country
+        [EnableQuery]
+        public SingleResult<Country> GetCountry([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Regions.Where(m => m.Id == key).Select(m => m.Country));
         }
 
         protected override void Dispose(bool disposing)
@@ -155,9 +163,9 @@ namespace BookingApp.Controllers.OData
             base.Dispose(disposing);
         }
 
-        private bool AccommodationTypeExists(int key)
+        private bool RegionExists(int key)
         {
-            return db.AccommodationsTypes.Count(e => e.Id == key) > 0;
+            return db.Regions.Count(e => e.Id == key) > 0;
         }
     }
 }

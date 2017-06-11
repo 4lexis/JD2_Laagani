@@ -26,7 +26,7 @@ namespace BookingApp.Controllers.OData
     builder.EntitySet<AppUser>("AppUsers"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class CommentsController : ODataController
+    public class OCommentsController : ODataController
     {
         private BAContext db = new BAContext();
 

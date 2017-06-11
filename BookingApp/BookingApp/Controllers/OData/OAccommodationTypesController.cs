@@ -21,31 +21,29 @@ namespace BookingApp.Controllers.OData
     using System.Web.Http.OData.Extensions;
     using BookingApp.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<RoomReservations>("RoomReservations");
-    builder.EntitySet<Room>("Rooms"); 
-    builder.EntitySet<AppUser>("AppUsers"); 
+    builder.EntitySet<AccommodationType>("AccommodationTypes");
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class RoomReservationsController : ODataController
+    public class OAccommodationTypesController : ODataController
     {
         private BAContext db = new BAContext();
 
-        // GET: odata/RoomReservations
+        // GET: odata/AccommodationTypes
         [EnableQuery]
-        public IQueryable<RoomReservations> GetRoomReservations()
+        public IQueryable<AccommodationType> GetAccommodationTypes()
         {
-            return db.RoomReservationss;
+            return db.AccommodationsTypes;
         }
 
-        // GET: odata/RoomReservations(5)
+        // GET: odata/AccommodationTypes(5)
         [EnableQuery]
-        public SingleResult<RoomReservations> GetRoomReservations([FromODataUri] int key)
+        public SingleResult<AccommodationType> GetAccommodationType([FromODataUri] int key)
         {
-            return SingleResult.Create(db.RoomReservationss.Where(roomReservations => roomReservations.Id == key));
+            return SingleResult.Create(db.AccommodationsTypes.Where(accommodationType => accommodationType.Id == key));
         }
 
-        // PUT: odata/RoomReservations(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<RoomReservations> patch)
+        // PUT: odata/AccommodationTypes(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<AccommodationType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +52,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
-            if (roomReservations == null)
+            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
+            if (accommodationType == null)
             {
                 return NotFound();
             }
 
-            patch.Put(roomReservations);
+            patch.Put(accommodationType);
 
             try
             {
@@ -68,7 +66,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomReservationsExists(key))
+                if (!AccommodationTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +76,26 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(roomReservations);
+            return Updated(accommodationType);
         }
 
-        // POST: odata/RoomReservations
-        public IHttpActionResult Post(RoomReservations roomReservations)
+        // POST: odata/AccommodationTypes
+        public IHttpActionResult Post(AccommodationType accommodationType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.RoomReservationss.Add(roomReservations);
+            db.AccommodationsTypes.Add(accommodationType);
             db.SaveChanges();
 
-            return Created(roomReservations);
+            return Created(accommodationType);
         }
 
-        // PATCH: odata/RoomReservations(5)
+        // PATCH: odata/AccommodationTypes(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<RoomReservations> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<AccommodationType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +104,13 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
-            if (roomReservations == null)
+            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
+            if (accommodationType == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(roomReservations);
+            patch.Patch(accommodationType);
 
             try
             {
@@ -120,7 +118,7 @@ namespace BookingApp.Controllers.OData
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomReservationsExists(key))
+                if (!AccommodationTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -130,36 +128,22 @@ namespace BookingApp.Controllers.OData
                 }
             }
 
-            return Updated(roomReservations);
+            return Updated(accommodationType);
         }
 
-        // DELETE: odata/RoomReservations(5)
+        // DELETE: odata/AccommodationTypes(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
-            if (roomReservations == null)
+            AccommodationType accommodationType = db.AccommodationsTypes.Find(key);
+            if (accommodationType == null)
             {
                 return NotFound();
             }
 
-            db.RoomReservationss.Remove(roomReservations);
+            db.AccommodationsTypes.Remove(accommodationType);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // GET: odata/RoomReservations(5)/Room
-        [EnableQuery]
-        public SingleResult<Room> GetRoom([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.Room));
-        }
-
-        // GET: odata/RoomReservations(5)/User
-        [EnableQuery]
-        public SingleResult<AppUser> GetUser([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.User));
         }
 
         protected override void Dispose(bool disposing)
@@ -171,9 +155,9 @@ namespace BookingApp.Controllers.OData
             base.Dispose(disposing);
         }
 
-        private bool RoomReservationsExists(int key)
+        private bool AccommodationTypeExists(int key)
         {
-            return db.RoomReservationss.Count(e => e.Id == key) > 0;
+            return db.AccommodationsTypes.Count(e => e.Id == key) > 0;
         }
     }
 }

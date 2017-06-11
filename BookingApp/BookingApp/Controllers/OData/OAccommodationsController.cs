@@ -27,7 +27,7 @@ namespace BookingApp.Controllers.OData
     builder.EntitySet<User>("Users1"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class AccommodationsController : ODataController
+    public class OAccommodationsController : ODataController
     {
         private BAContext db = new BAContext();
 
