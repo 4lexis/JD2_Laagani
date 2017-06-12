@@ -1,15 +1,15 @@
-import { Accommodation } from './accommodation';
-import { Region } from './region';
-
 export class Place {
     
-    private id: number;
-    private name: string;
+    id: number;
+    name: string;
     
-    public m_Accommodation: Accommodation[];
+    m_Accommodation: number[];
     /*[Required]*/
-    public Region: Region;
+    Region: number;
     
-    constructor() {
+    constructor(id:number, name:string, region:number) {
+        this.id = id;
+        this.name = name;
+        this.Region = region;
     }
 }

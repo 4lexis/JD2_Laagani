@@ -1,12 +1,12 @@
-import { Accommodation } from "./accommodation";
-
 export class AccommodationType {    
     
-    private id: number;
-    private name: string;
+    id: number;
+    name: string;
    
-    public m_Accommodation: Accommodation[];
+    m_Accommodation: number[];
    
-    constructor() {
+    constructor(id:number, name:string) {
+        this.id = id;
+        this.name = name;
     }
 }

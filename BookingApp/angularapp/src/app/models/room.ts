@@ -1,19 +1,21 @@
-import { RoomReservation } from './roomReservation';
-import { Accommodation } from './accommodation';
-
 export class Room {
 
-    private bedCount: number;
-    private description: string;
-    private id: number;
-    private pricePerNight: number;
-    private roomNumber: number;
+    bedCount: number;
+    description: string;
+    id: number;
+    pricePerNight: number;
+    roomNumber: number;
 
-    public m_RoomReservations: RoomReservation[];
+    m_RoomReservations: number[];
     /*[Required]*/
-    public Accommodation: Accommodation;
+    Accommodation: number;
     
-    constructor() {
-        
+    constructor(id:number, beds:number, desc:string, price:number, rooms:number, acc:number) {
+        this.id = id;
+        this.bedCount = beds;
+        this.description = desc;
+        this.pricePerNight = price;
+        this.roomNumber = rooms;
+        this.Accommodation = acc;        
     }
 }
