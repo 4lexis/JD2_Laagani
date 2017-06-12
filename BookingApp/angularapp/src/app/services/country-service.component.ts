@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import {Country} from './country';
+import {Country} from '../model/country';
 
 @Injectable()
 export class CountryService {

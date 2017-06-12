@@ -1,0 +1,14 @@
+<div> Accommodation Types </div>
+<ul>
+    <li *ngFor="let acctypes of accommodationTypes"> {{acctypes.Name}} </li>
+</ul>
+<h1>Add Accommodation Types</h1>
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div>   
+    <input type="submit">
+  </form>
+</div>
