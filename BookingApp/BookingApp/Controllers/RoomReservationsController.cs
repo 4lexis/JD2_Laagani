@@ -17,16 +17,16 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         // GET: api/RoomReservations
-        public IQueryable<RoomReservations> GetRoomReservationss()
+        public IQueryable<RoomReservation> GetRoomReservationss()
         {
             return db.RoomReservationss;
         }
 
         // GET: api/RoomReservations/5
-        [ResponseType(typeof(RoomReservations))]
+        [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult GetRoomReservations(int id)
         {
-            RoomReservations roomReservations = db.RoomReservationss.Find(id);
+            RoomReservation roomReservations = db.RoomReservationss.Find(id);
             if (roomReservations == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace BookingApp.Controllers
 
         // PUT: api/RoomReservations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRoomReservations(int id, RoomReservations roomReservations)
+        public IHttpActionResult PutRoomReservations(int id, RoomReservation roomReservations)
         {
             if (!ModelState.IsValid)
             {
@@ -71,8 +71,8 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/RoomReservations
-        [ResponseType(typeof(RoomReservations))]
-        public IHttpActionResult PostRoomReservations(RoomReservations roomReservations)
+        [ResponseType(typeof(RoomReservation))]
+        public IHttpActionResult PostRoomReservations(RoomReservation roomReservations)
         {
             if (!ModelState.IsValid)
             {
@@ -86,10 +86,10 @@ namespace BookingApp.Controllers
         }
 
         // DELETE: api/RoomReservations/5
-        [ResponseType(typeof(RoomReservations))]
+        [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult DeleteRoomReservations(int id)
         {
-            RoomReservations roomReservations = db.RoomReservationss.Find(id);
+            RoomReservation roomReservations = db.RoomReservationss.Find(id);
             if (roomReservations == null)
             {
                 return NotFound();

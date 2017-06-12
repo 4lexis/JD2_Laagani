@@ -24,14 +24,14 @@ namespace BookingApp.Models
         private int pricePerNight;
         private int roomNumber;
 
-        public List<RoomReservations> m_RoomReservations;
+        public List<RoomReservation> m_RoomReservations;
 
         [Required]
         public Accommodation Accommodation { get; set; }
 
         public Room()
         {
-            m_RoomReservations = new List<RoomReservations>();
+            m_RoomReservations = new List<RoomReservation>();
         }
 
         public int BedCount
