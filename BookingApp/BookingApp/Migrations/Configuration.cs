@@ -136,7 +136,7 @@ namespace BookingApp.Migrations
 
             context.Rooms.Add(room);
 
-            RoomReservations rez = new RoomReservations();
+            RoomReservation rez = new RoomReservation();
             rez.StartDate = DateTime.Now;
             rez.EndDate = DateTime.Now;
             rez.Timestamp = DateTime.Now;

@@ -12,12 +12,12 @@ namespace BookingApp.Models
         private string password;
         private string username;
         public List<Comment> m_Comment;
-        public List<RoomReservations> m_RoomReservations;
+        public List<RoomReservation> m_RoomReservations;
         public List<Accommodation> m_Accommodation;
 
         public AppUser()
         {
-            m_RoomReservations = new List<RoomReservations>();
+            m_RoomReservations = new List<RoomReservation>();
             m_Accommodation = new List<Accommodation>();
             m_Comment = new List<Comment>();
         }

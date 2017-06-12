@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingApp.Models
 {
-    public class RoomReservations
+    public class RoomReservation
     {
 
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace BookingApp.Models
         [Required]
         public Room Room { get; set; }
 
-        public RoomReservations()
+        public RoomReservation()
         {
 
         }

@@ -32,20 +32,20 @@ namespace BookingApp.Controllers.OData
 
         // GET: odata/RoomReservations
         [EnableQuery]
-        public IQueryable<RoomReservations> GetRoomReservations()
+        public IQueryable<RoomReservation> GetRoomReservations()
         {
             return db.RoomReservationss;
         }
 
         // GET: odata/RoomReservations(5)
         [EnableQuery]
-        public SingleResult<RoomReservations> GetRoomReservations([FromODataUri] int key)
+        public SingleResult<RoomReservation> GetRoomReservations([FromODataUri] int key)
         {
             return SingleResult.Create(db.RoomReservationss.Where(roomReservations => roomReservations.Id == key));
         }
 
         // PUT: odata/RoomReservations(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<RoomReservations> patch)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<RoomReservation> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,7 +54,7 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            RoomReservation roomReservations = db.RoomReservationss.Find(key);
             if (roomReservations == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace BookingApp.Controllers.OData
         }
 
         // POST: odata/RoomReservations
-        public IHttpActionResult Post(RoomReservations roomReservations)
+        public IHttpActionResult Post(RoomReservation roomReservations)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace BookingApp.Controllers.OData
 
         // PATCH: odata/RoomReservations(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<RoomReservations> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<RoomReservation> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,7 +106,7 @@ namespace BookingApp.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            RoomReservation roomReservations = db.RoomReservationss.Find(key);
             if (roomReservations == null)
             {
                 return NotFound();
@@ -136,7 +136,7 @@ namespace BookingApp.Controllers.OData
         // DELETE: odata/RoomReservations(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            RoomReservations roomReservations = db.RoomReservationss.Find(key);
+            RoomReservation roomReservations = db.RoomReservationss.Find(key);
             if (roomReservations == null)
             {
                 return NotFound();
