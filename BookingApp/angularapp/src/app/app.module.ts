@@ -6,12 +6,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
+
 import { CountryComponent} from './country/country.component';
 import { CountryService} from './services/country-service.component';
+
+import { AccommodationTypeComponent} from './accommodation-type/accommodation-type.component';
+import { AccommodationTypeService} from './services/accommodation-type-service.component';
+
 
 const Routes = [
   {path: "home", component: HomeComponent},
   {path: "country", component: CountryComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent},
 ]
 
 
@@ -19,7 +25,8 @@ const Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    CountryComponent    
+    CountryComponent,
+    AccommodationTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService],
+  providers: [CountryService, AccommodationTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
