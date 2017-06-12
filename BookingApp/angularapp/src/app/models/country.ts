@@ -1,13 +1,15 @@
-import { Region } from './region';
-
 export class Country {
+    
+    code: number;
+    id: number;
+    name: string;
 
-    private code: number;
-    private id: number;
-    private name: string;
+    m_Region: number;
 
-    public m_Region: Region[];
-
-    constructor() {
+    constructor(id:number, code:number, name:string, region:number) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.m_Region = region;
     }
 }

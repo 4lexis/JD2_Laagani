@@ -1,15 +1,15 @@
-import { Place } from './place';
-import { Country } from './country';
-
 export class Region {
    
-    private id: number;
-    private name: string;
+    id: number;
+    name: string;
 
-    public m_Place: Place[];
+    m_Place: number[];
     /*[Required]*/
-    public Country: Country;
+    Country: number;
 
-    constructor() {
+    constructor(id:number, name:string, country:number) {
+        this.id = id;
+        this.name = name;
+        this.Country = country;
     }
 }

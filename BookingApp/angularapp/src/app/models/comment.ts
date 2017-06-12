@@ -1,18 +1,19 @@
-import { AppUser } from './appUser';
-import { Accommodation } from './accommodation';
-
 export class Comment {
 
-    public Id: number;
-    private grade: number;
-    private text: string;
+    id: number;
+    grade: number;
+    text: string;
 
     /*[Required]*/
-    public User: AppUser;
+    user: number;
     /*[Required]*/
-    public Accommodation: Accommodation;
+    accommodation: number;
     
-    constructor() {
-
+    constructor(id:number, grade:number, text:string, user:number, acc:number) {
+        this.id = id;
+        this.grade = grade;
+        this.text = text;
+        this.user = user;
+        this.accommodation = acc;
     }
 }

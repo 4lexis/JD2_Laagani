@@ -1,19 +1,21 @@
-import { AppUser } from './appUser';
-import { Room } from './room';
-
 export class RoomReservation {
 
-    public Id: number;
-    private endDate: Date;
-    private startDate: Date;
-    private timestamp: Date;
+    id: number;
+    endDate: Date;
+    startDate: Date;
+    timestamp: Date;
 
     /*[Required]*/
-    public User: AppUser;
+    User: number;
     /*[Required]*/
-    public Room: Room;
+    Room: number;
 
-    constructor() {
-
+    constructor(id:number, endData:Date, starDate:Date, timestamp:Date, user:number, room:number) {
+        this.id = id;
+        this.endDate = endData;
+        this.startDate = starDate;
+        this.timestamp = timestamp;
+        this.User = user;
+        this.Room = room;
     }
 }
