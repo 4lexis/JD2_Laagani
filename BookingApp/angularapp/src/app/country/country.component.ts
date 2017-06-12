@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Country} from '../services/country';
+import { CountryService }  from '../services/country-service.component';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-country',
@@ -6,11 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryComponent implements OnInit {
 
+  country:Country[];
+  error:string;
+  singleCountry:Country;
 
-  constructor() {
+  constructor(private countryService: CountryService) { }
+
+  ngOnInit() 
+  {
+    this.getCountries();
   }
 
-  ngOnInit() {
+  getCountries(): void {
+    this.countryService
+        .getCountries()
+        .then(country => this.country = country)        
+  }
+
+  onSubmit(singleCountry: Country, form: NgForm) {
+    console.log(singleCountry);
+    this.singleCountry=singleCountry;
+    this.save();
+    form.reset();    
+  }
+
+  save(): void {
+    this.countryService.create(this.singleCountry);    
   }
 
 }

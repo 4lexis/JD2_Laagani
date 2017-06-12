@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
 import { CountryComponent} from './country/country.component';
+import { CountryService} from './services/country-service.component';
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -26,7 +27,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [],
+  providers: [CountryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,18 @@
 <div> Country </div>
+<ul>
+    <li *ngFor="let cnt of country"> {{cnt.Name}} </li>
+</ul>
+<h1>Add country</h1>
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div>
+    <div>
+      <label for="Code">Code</label>
+      <input type="text" name="Code" ngModel>
+    </div>
+    <input type="submit">
+  </form>
+</div>
