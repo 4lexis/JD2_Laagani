@@ -13,11 +13,14 @@ import { CountryService} from './services/country-service.component';
 import { AccommodationTypeComponent} from './accommodation-type/accommodation-type.component';
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
+import {RegionComponent} from './region/region.component';
+import {RegionService} from './services/region-service.component';
+
 
 const Routes = [
   {path: "home", component: HomeComponent},
   {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
 
 
@@ -26,7 +29,8 @@ const Routes = [
     AppComponent,
     HomeComponent,
     CountryComponent,
-    AccommodationTypeComponent
+    AccommodationTypeComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService],
+  providers: [CountryService, AccommodationTypeService, RegionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
