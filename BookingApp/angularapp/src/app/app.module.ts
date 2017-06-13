@@ -39,4 +39,4 @@ const Routes = [
   providers: [CountryService, AccommodationTypeService, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
