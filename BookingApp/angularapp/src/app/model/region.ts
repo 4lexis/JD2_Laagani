@@ -4,7 +4,8 @@ export class Region {
    
     Id: number;
     Name: string;
-    Country_Id: number;    
+    Country_Id: number;
+    Country: Country;
 
     constructor(){}    
 }
