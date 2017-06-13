@@ -7,16 +7,17 @@ import { tokenNotExpired } from "ng2-jwt";
 export class AuthService {
 
     constructor(private http: Http) { }
- 
+
     login(username: string, password: string) {
 
-        this.http.post('/ouath/token', JSON.stringify({ username: username, password: password }))
+console.log("user: " + username + " pass: " + password);
+
+        this.http.post('http://localhost:54042/ouath/token', JSON.stringify({ username: username, password: password, grant_type: 'password' }))
             .map(res => res.json())
             .subscribe(
                 data => localStorage.setItem('id_token', data.id_token),
                 error => console.log('auth service error: ' + error)
             );
-
         /*
         this.dataService.getUserDetails().subscribe(
                     (data) => {
