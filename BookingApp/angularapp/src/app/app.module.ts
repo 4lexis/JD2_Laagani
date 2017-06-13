@@ -13,11 +13,13 @@ import { CountryService} from './services/country-service.component';
 import { AccommodationTypeComponent} from './accommodation-type/accommodation-type.component';
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
+import { AuthGuard } from './security/auth.guard';
+
 
 const Routes = [
   {path: "home", component: HomeComponent},
-  {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent},
+  {path: "country", component: CountryComponent, canActivate:[AuthGuard]},
+  {path: "accommodation-type", component: AccommodationTypeComponent, canActivate:[AuthGuard]},
 ]
 
 
@@ -34,7 +36,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService],
+  providers: [CountryService, AccommodationTypeService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
