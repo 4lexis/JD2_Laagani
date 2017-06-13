@@ -9,23 +9,35 @@ export class UserService {
     constructor(private http: Http) { }
 
     getAll() {
-        return this.http.get('/api/AppUsers', this.jwt()).map((response: Response) => response.json());
-    }
+
+        /*
+        var ret: AppUser[] = [];
+ 
+        this.http.get('http://localhost:54042/api/AppUsers').
+            map(res => res.json())
+            .subscribe(res => {
+                console.log("res: " + res[0].Username);
+                ret = res;
+            });
+        return ret;
+         */
+        return this.http.get('http://localhost:54042/api/AppUsers', this.jwt()).map((response: Response) => response.json());
+}
 
     getById(id: number) {
-        return this.http.get('/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get('http://localhost:54042/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
     create(user: AppUser) {
-        return this.http.post('/api/AppUsers', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post('http://localhost:54042/api/AppUsers', user, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: AppUser) {
-        return this.http.put('/api/AppUsers/' + user.id, user, this.jwt()).map((response: Response) => response.json());
+        return this.http.put('http://localhost:54042/api/AppUsers/' + user.id, user, this.jwt()).map((response: Response) => response.json());
     }
 
     delete(id: number) {
-        return this.http.delete('/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.delete('http://localhost:54042/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
     // private helper methods

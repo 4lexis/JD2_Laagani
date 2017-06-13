@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
   selector: 'app-country',
   templateUrl: './country.component.html'
 })
+
 export class CountryComponent implements OnInit {
 
   country:Country[];

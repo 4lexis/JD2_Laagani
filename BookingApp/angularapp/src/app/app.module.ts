@@ -14,21 +14,27 @@ import { AccommodationTypeComponent} from './accommodation-type/accommodation-ty
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
 import { AuthGuard } from './security/auth.guard';
+import { AlertService, AuthService, UserService } from './auth-services/index';
+import { LoginComponent } from './login/login.component';
 
 
 const Routes = [
   {path: "home", component: HomeComponent},
-  {path: "country", component: CountryComponent, canActivate:[AuthGuard]},
-  {path: "accommodation-type", component: AccommodationTypeComponent, canActivate:[AuthGuard]},
-]
+  {path: "country", component: CountryComponent, canActivate: [AuthGuard]},
+  {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
+  {path: "login", component: LoginComponent},
 
+  // otherwise redirect to home page
+  {path: '**', redirectTo: ''}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CountryComponent,
-    AccommodationTypeComponent
+    AccommodationTypeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard],
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
