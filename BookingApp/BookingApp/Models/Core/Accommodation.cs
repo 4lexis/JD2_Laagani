@@ -32,20 +32,16 @@ namespace BookingApp.Models
 
         public List<Room> m_Room;
 
-        [ForeignKey("Place")]
-        public int Place_Id { get; set; }
-
+        [Required]
         public Place Place { get; set; }
 
-        [ForeignKey("AppUser")]
-        public int AppUser_Id { get; set; }
+        
+        [Required]
+        public AppUser User { get; set; }
 
-        public AppUser AppUser { get; set; }
-
-        [ForeignKey("AccommodationType")]
-        public int AccommodationType_Id { get; set; }
-
-        public AccommodationType AccommodationType { get; set; }
+        
+        [Required]
+        public AccommodationType AType { get; set; }
 
 
         public Accommodation()

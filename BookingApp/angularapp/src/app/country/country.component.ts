@@ -31,18 +31,11 @@ export class CountryComponent implements OnInit {
     console.log(singleCountry);
     this.singleCountry=singleCountry;
     this.save();
-    form.reset();
-    window.location.reload();    
+    form.reset();    
   }
 
   save(): void {
-    this.countryService.create(this.singleCountry);
-  }
-
-  delte(country): void
-  {
-    this.singleCountry=country;
-    this.countryService.delete(this.singleCountry.Id);    
+    this.countryService.create(this.singleCountry);    
   }
 
 }
