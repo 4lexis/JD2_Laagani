@@ -18,6 +18,8 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertService, AuthService, UserService } from './auth-services/index';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './registration/register.component';
+import {RegionComponent} from './region/region.component';
+import {RegionService} from './services/region-service.component';
 
 
 const Routes = [
@@ -28,7 +30,9 @@ const Routes = [
   {path: "register", component: RegisterComponent},
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: ''},
+  {path: "country", component: CountryComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
 
 @NgModule({
@@ -39,7 +43,9 @@ const Routes = [
     AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    AccommodationTypeComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
+  providers: [CountryService, AccommodationTypeService, RegionService, AuthGuard, AlertService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
