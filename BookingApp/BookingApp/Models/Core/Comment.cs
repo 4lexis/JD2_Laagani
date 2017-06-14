@@ -23,10 +23,14 @@ namespace BookingApp.Models
         private int grade;
         private string text;
 
-        [Required]     
-        public AppUser User { get; set; }
+        [ForeignKey("AppUser")]
+        public int AppUser_Id { get; set; }
 
-        [Required]
+        public AppUser AppUser { get; set; }
+
+        [ForeignKey("Accommodation")]
+        public int Accommodation_Id { get; set; }
+
         public Accommodation Accommodation { get; set; }
 
         public Comment()

@@ -1,7 +1,8 @@
 <div> Country </div>
 <ul>
-    <li *ngFor="let cnt of country"> {{cnt.Name}} </li>
+    <li *ngFor="let cnt of country"> {{cnt.Name}} {{cnt.Id}} <button (click)="delte(cnt)">X</button> </li>
 </ul>
+
 <h1>Add country</h1>
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
@@ -16,3 +17,5 @@
     <input type="submit">
   </form>
 </div>
+<br><br>  
+<app-region> </app-region>

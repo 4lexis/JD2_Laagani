@@ -113,17 +113,17 @@ namespace BookingApp.Migrations
             acc.Name = "Delux";
             acc.ImageURL = "url";
             acc.Place = place;
-            acc.AType = acctype;
+            acc.AccommodationType = acctype;
             //acc.m_Comment.Add(new Comment());
             //acc.m_Room.Add(new Room());
-            acc.User = user1;
+            acc.AppUser = user1;
             context.Accommodations.Add(acc);
 
             Comment comment = new Comment();
             comment.Grade = 3;
             comment.Text = "awe";
             comment.Accommodation = acc;
-            comment.User = user1;
+            comment.AppUser = user1;
 
             context.Comments.Add(comment);
 
@@ -141,7 +141,7 @@ namespace BookingApp.Migrations
             rez.EndDate = DateTime.Now;
             rez.Timestamp = DateTime.Now;
             rez.Room = room;
-            rez.User = user1;
+            rez.AppUser = user1;
 
             context.RoomReservationss.Add(rez);
             
