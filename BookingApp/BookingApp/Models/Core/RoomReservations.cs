@@ -23,10 +23,14 @@ namespace BookingApp.Models
         private DateTime? startDate;
         private DateTime? timestamp;
 
-        [Required]
-        public AppUser User { get; set; }
+        [ForeignKey("AppUser")]
+        public int AppUser_Id { get; set; }
 
-        [Required]
+        public AppUser AppUser { get; set; }
+
+        [ForeignKey("Room")]
+        public int Room_Id { get; set; }
+
         public Room Room { get; set; }
 
         public RoomReservation()

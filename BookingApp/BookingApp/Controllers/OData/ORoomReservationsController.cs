@@ -159,7 +159,7 @@ namespace BookingApp.Controllers.OData
         [EnableQuery]
         public SingleResult<AppUser> GetUser([FromODataUri] int key)
         {
-            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.User));
+            return SingleResult.Create(db.RoomReservationss.Where(m => m.Id == key).Select(m => m.AppUser));
         }
 
         protected override void Dispose(bool disposing)

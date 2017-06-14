@@ -153,7 +153,7 @@ namespace BookingApp.Controllers.OData
         [EnableQuery]
         public SingleResult<AccommodationType> GetAType([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Accommodations.Where(m => m.Id == key).Select(m => m.AType));
+            return SingleResult.Create(db.Accommodations.Where(m => m.Id == key).Select(m => m.AccommodationType));
         }
 
         // GET: odata/Accommodations(5)/Place
@@ -167,7 +167,7 @@ namespace BookingApp.Controllers.OData
         [EnableQuery]
         public SingleResult<AppUser> GetUser([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Accommodations.Where(m => m.Id == key).Select(m => m.User));
+            return SingleResult.Create(db.Accommodations.Where(m => m.Id == key).Select(m => m.AppUser));
         }
 
         protected override void Dispose(bool disposing)

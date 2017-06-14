@@ -24,7 +24,9 @@ namespace BookingApp.Models
 
         public List<Accommodation> m_Accommodation;
 
-        [Required]
+        [ForeignKey("Region")]
+        public int Region_Id { get; set; }
+
         public Region Region { get; set; }
 
 
