@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
   selector: 'app-country',
   templateUrl: './country.component.html'
 })
+
 export class CountryComponent implements OnInit {
 
   country:Country[];
@@ -31,6 +32,7 @@ export class CountryComponent implements OnInit {
     this.singleCountry=singleCountry;
     this.save();
     form.reset();    
+
   }
 
   save(): void {

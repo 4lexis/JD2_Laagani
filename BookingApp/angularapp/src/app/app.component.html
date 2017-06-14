@@ -1,13 +1,9 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
-<h2>Content!</h2>
-<nav>
-    <a [routerLink]="['/home']">Home</a>
-    <a [routerLink]="['/country']">Country</a>
-    <a [routerLink]="['/accommodation-type']">Accommodation Type</a>
-</nav>
-<router-outlet></router-outlet>
