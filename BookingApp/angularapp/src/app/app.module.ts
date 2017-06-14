@@ -13,16 +13,27 @@ import { CountryService} from './services/country-service.component';
 import { AccommodationTypeComponent} from './accommodation-type/accommodation-type.component';
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
+import { AuthGuard } from './security/auth.guard';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService, AuthService, UserService } from './auth-services/index';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './registration/register.component';
 import {RegionComponent} from './region/region.component';
 import {RegionService} from './services/region-service.component';
 
 
 const Routes = [
   {path: "home", component: HomeComponent},
+  {path: "country", component: CountryComponent, canActivate: [AuthGuard]},
+  {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
+  {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
+
+  // otherwise redirect to home page
+  {path: '**', redirectTo: ''}
   {path: "country", component: CountryComponent},
   {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
-
 
 @NgModule({
   declarations: [
@@ -31,6 +42,10 @@ const Routes = [
     CountryComponent,
     AccommodationTypeComponent,
     RegionComponent
+    AccommodationTypeComponent,
+    LoginComponent,
+    RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +53,8 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
   providers: [CountryService, AccommodationTypeService, RegionService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
