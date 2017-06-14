@@ -28,11 +28,11 @@ const Routes = [
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "country", component: CountryComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent}, 
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''},
-  {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent},  
+  {path: '**', redirectTo: ''} 
 ]
 
 @NgModule({
