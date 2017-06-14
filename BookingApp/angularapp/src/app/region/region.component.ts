@@ -14,18 +14,22 @@ export class RegionComponent implements OnInit {
   public regions:Array<Region> = new Array<Region>();
   error:string;
   region:Region = new Region();
+  countries: Array<Country> = new Array<Country>();
+  selectedCnt: Country;
 
   constructor(private regionService: RegionService, private countryService: CountryService) 
-  {             
+  {                 
   }
 
   ngOnInit() 
   {
-    this.getRegions();    
+    this.getRegions();
+    this.getCountries();
   }  
   
 
   getRegions(): void {
+    
     this.regionService
         .getRegions()
         .then(regions =>{ this.regions = regions;
@@ -37,16 +41,31 @@ export class RegionComponent implements OnInit {
         );        
   }
 
+  getCountries(): void {
+    this.countryService
+        .getCountries()
+        .then(country => this.countries = country)        
+  }
+
   onSubmit(region: Region, form: NgForm) {
-    console.log(region);
-    this.region=region;
+    console.log(region);    
+    this.region=region;    
+    this.region.Country_Id = region.Country.Id;
     this.save();
     form.reset();       
-  }
+  }  
 
   save(): void {
     this.regionService.create(this.region);
   }
+
+ private logDropdown(id: number): void {
+   
+        this.countryService.getCountry(id).then(country => {
+          this.selectedCnt=country
+          console.log(this.selectedCnt);
+      });
+    }
  
 
 }

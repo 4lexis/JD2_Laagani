@@ -30,8 +30,7 @@ export class CountryComponent implements OnInit {
     console.log(singleCountry);
     this.singleCountry=singleCountry;
     this.save();
-    form.reset();
-    window.location.reload();    
+    form.reset();    
   }
 
   save(): void {
