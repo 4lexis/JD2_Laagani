@@ -41,7 +41,7 @@ export class CountryService {
       .post(this.countryUrl, JSON.stringify(country), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Country)
-      .catch(this.handleError);      
+      .catch(this.handleError);
   }
 
   update(country: Country): Promise<Country> {

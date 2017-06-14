@@ -299,9 +299,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706131436130_StraniKljuc.cs" />
-    <Compile Include="Migrations\201706131436130_StraniKljuc.Designer.cs">
-      <DependentUpon>201706131436130_StraniKljuc.cs</DependentUpon>
+    <Compile Include="Migrations\201706081909332_Home_test.cs" />
+    <Compile Include="Migrations\201706081909332_Home_test.Designer.cs">
+      <DependentUpon>201706081909332_Home_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -396,12 +396,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <EmbeddedResource Include="Migrations\201706081909332_Home_test.resx">
+      <DependentUpon>201706081909332_Home_test.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706131436130_StraniKljuc.resx">
-      <DependentUpon>201706131436130_StraniKljuc.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
