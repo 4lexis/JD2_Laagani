@@ -25,11 +25,12 @@ export class UserService {
 }
 
     getById(id: number) {
-        return this.http.get('http://localhost:54042/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get('http://localhost:54042/api/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
     create(user: AppUser) {
-        return this.http.post('http://localhost:54042/api/AppUsers', user, this.jwt()).map((response: Response) => response.json());
+        console.log("user: " + user);
+        return this.http.post('http://localhost:54042/api/AppUsers/', user, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: AppUser) {
@@ -44,7 +45,7 @@ export class UserService {
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem('currentUsername'));
         if (currentUser && currentUser.token) {
             let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
             return new RequestOptions({ headers: headers });

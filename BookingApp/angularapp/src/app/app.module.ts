@@ -14,8 +14,10 @@ import { AccommodationTypeComponent} from './accommodation-type/accommodation-ty
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
 import { AuthGuard } from './security/auth.guard';
+import { AlertComponent } from './alert/alert.component';
 import { AlertService, AuthService, UserService } from './auth-services/index';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './registration/register.component';
 
 
 const Routes = [
@@ -23,6 +25,7 @@ const Routes = [
   {path: "country", component: CountryComponent, canActivate: [AuthGuard]},
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
 
   // otherwise redirect to home page
   {path: '**', redirectTo: ''}
@@ -34,7 +37,9 @@ const Routes = [
     HomeComponent,
     CountryComponent,
     AccommodationTypeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

@@ -78,9 +78,18 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
 
-            db.AppUsers.Add(appUser);
-            db.SaveChanges();
+            if (!db.Users.Any(u => u.UserName == appUser.Username))
+            {
+                var user = new BAIdentityUser() { UserName = appUser.Username, Email = appUser.Email, PasswordHash = BAIdentityUser.HashPassword(appUser.Password) };
+
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+
+
+            
 
             return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
         }

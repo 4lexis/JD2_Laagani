@@ -3,7 +3,6 @@ import { AuthService } from '../auth-services/auth-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {NgForm} from '@angular/forms';
  
-
 import { AlertService } from "../auth-services/index";
 import { AppUser } from "../models/app-user";
 
@@ -14,10 +13,8 @@ import { AppUser } from "../models/app-user";
 
 export class LoginComponent implements OnInit {
 
-    user: AppUser;
-    loading = false;
+    model: any = {};
     returnUrl: string;
-
 
     constructor(
         private route: ActivatedRoute,
@@ -32,8 +29,6 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-
-
 
   onLogin(user: AppUser, form: NgForm) {
     this.auth.login(user.username, user.password);

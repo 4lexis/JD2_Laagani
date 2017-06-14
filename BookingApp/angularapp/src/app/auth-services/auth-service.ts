@@ -1,57 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map'
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { tokenNotExpired } from "ng2-jwt";
+
+import { AppUser } from "../models/app-user";
  
 @Injectable()
 export class AuthService {
 
+
+    token = "";
+
+
     constructor(private http: Http) { }
 
     login(username: string, password: string) {
-
-console.log("user: " + username + " pass: " + password);
-
-        this.http.post('http://localhost:54042/ouath/token', JSON.stringify({ username: username, password: password, grant_type: 'password' }))
+        
+        this.http.post('http://localhost:54042/oauth/token', 'username='+username+'&password='+password+'&grant_type=password')
             .map(res => res.json())
             .subscribe(
-                data => localStorage.setItem('id_token', data.id_token),
+                data =>  {
+                    localStorage.setItem('id_token', data.access_token);
+                   localStorage.setItem("currentUsername", username);
+                },
                 error => console.log('auth service error: ' + error)
             );
-        /*
-        this.dataService.getUserDetails().subscribe(
-                    (data) => {
-                        console.log('fetched userdata for edit', data.results)
-                        this.modify_users = data.results;
-                        console.log(data.results);
-                        console.log(this.modify_users);
-                    },
-                    (error) => {
-                        console.log('Failure viewUserDetails');
-                        alert('Error getting user Details to edit');
-                    });
-        */
-        
-        /*
-        return this.http.post('/oauth/token', JSON.stringify({ username: username, password: password }))
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-
-                    tokenNotExpired().
-
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-            });
-        */       
     }
  
     logout() {
         // remove user from local storage to log user out
         //localStorage.removeItem('currentUser');
         localStorage.removeItem('id_token');
+        localStorage.removeItem('currentUsername');
+    }
+
+    register(user: AppUser) {
+        this.http.post('http://localhost:54042/register', JSON.stringify(user))
+            .map(res => res.json())
+            .subscribe(
+                data =>  {
+                    console.log("registration ok");
+                },
+                error => console.log('auth service error: ' + error)
+            );
     }
 
     loggedIn() {

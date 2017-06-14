@@ -4,7 +4,7 @@ import { AlertService } from '../auth-services/index';
 @Component({
     moduleId: module.id,
     selector: 'alert',
-    templateUrl: 'alert.component.html'
+    templateUrl: './alert.component.html'
 })
 
 export class AlertComponent {
