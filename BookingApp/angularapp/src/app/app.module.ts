@@ -30,7 +30,7 @@ const Routes = [
   {path: "register", component: RegisterComponent},
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: ''},
   {path: "country", component: CountryComponent},
   {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
@@ -43,7 +43,7 @@ const Routes = [
     AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
     AccommodationTypeComponent,
     RegionComponent
   ],
@@ -53,8 +53,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, RegionService],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
+  providers: [CountryService, AccommodationTypeService, RegionService, AuthGuard, AlertService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
