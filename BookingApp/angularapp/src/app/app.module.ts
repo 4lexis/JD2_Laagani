@@ -41,11 +41,11 @@ const Routes = [
     HomeComponent,
     CountryComponent,
     AccommodationTypeComponent,
-    RegionComponent
-    AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
     AlertComponent
+    AccommodationTypeComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +53,8 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
   providers: [CountryService, AccommodationTypeService, RegionService],
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
