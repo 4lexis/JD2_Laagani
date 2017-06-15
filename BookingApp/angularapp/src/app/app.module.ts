@@ -23,9 +23,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './registration/register.component';
 import {RegionComponent} from './region/region.component';
 import {RegionService} from './services/region-service.component';
+import { UserComponent } from './user/user.component';
 
-import { AgmCoreModule } from '@agm/core';
-import { MapComponent } from './map/map.component';
+
+import { AgmCoreModule } from "@agm/core";
+import { MapComponent } from "./map/map.component";
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -33,13 +35,10 @@ const Routes = [
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent}, 
+  {path: "user", component: UserComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''},
-  {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent},  
+  {path: '**', redirectTo: ''}
 ]
 
 @NgModule({
@@ -48,13 +47,13 @@ const Routes = [
     HomeComponent,
     CountryComponent,
     AccommodationTypeComponent,
-    RegionComponent
-    AccommodationTypeComponent,
+    RegionComponent,
     LoginComponent,
     RegisterComponent,
     AlertComponent,
     PlaceComponent,
-    MapComponent
+    MapComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,7 @@ export class AuthService {
                 data =>  {
                     localStorage.setItem('id_token', data.access_token);
                     localStorage.setItem("currentUser", user.Username);
-                    this.auth.getByUsername(user.Username).subscribe(
+                    this.auth.getRoleByUsername(user.Username).subscribe(
                         data => {
                             this.alertService.success('Login successful', true);
                             localStorage.setItem('currentRole', data);

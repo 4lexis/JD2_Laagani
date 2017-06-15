@@ -39,6 +39,22 @@ namespace BookingApp.Controllers
             return Ok(bAIdentityUser);
         }
 
+        [Route("roles")]
+        // GET: api/BAIdentityUsers/
+        public IHttpActionResult GetRoles()
+        {
+            List<string> roles = new List<string>();
+
+            foreach (IdentityRole r in db.Roles)
+            {
+                roles.Add(r.Name);
+            }
+
+
+            return Ok(roles);
+        }
+
+
         [Route("roles/{username}")]
         // GET: api/BAIdentityUsers/
         [ResponseType(typeof(BAIdentityUser))]

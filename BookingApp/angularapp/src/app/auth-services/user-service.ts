@@ -10,6 +10,8 @@ export class UserService {
 
     url = "http://localhost:54042/api/AppUsers/";
 
+    rolesUrl = "http://localhost:54042/roles/";
+
     constructor(private http: Http) { }
 
     getAll() {
@@ -25,11 +27,18 @@ export class UserService {
             });
         return ret;
          */
-        return this.http.get(this.url, this.jwt()).map((response: Response) => response.json());
-}
+        return this.http.get("http://localhost:54042/api/BAIdentityUsers", this.jwt()).map((response: Response) => response.json());
+    }
 
-    getByUsername(username: string) {
-        return this.http.get("http://localhost:54042/roles/" + username, this.jwt()).map((response: Response) => response.json());
+    
+    getAllRoles() {
+        return this.http.get(this.rolesUrl, this.jwt()).map((response: Response) => response.json());
+    }
+    
+
+
+    getRoleByUsername(username: string) {
+        return this.http.get(this.rolesUrl + username, this.jwt()).map((response: Response) => response.json());
     }
 
     create(user: AppUser) {
@@ -48,8 +57,12 @@ export class UserService {
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-         let token = JSON.parse(localStorage.getItem('id_token'));
+        let currentUser = localStorage.getItem('currentUser');
+         let token = localStorage.getItem('id_token');
+
+         console.log("currentUser: " + currentUser);
+         console.log("token: " + token);
+
         if (currentUser && token) {
             let headers = new Headers({ 'Authorization': 'Bearer ' + token });
             return new RequestOptions({ headers: headers });
