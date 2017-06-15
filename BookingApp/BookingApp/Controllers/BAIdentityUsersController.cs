@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -16,7 +18,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         // GET: api/BAIdentityUsers
         public IQueryable<BAIdentityUser> GetBAIdentityUsers()
         {
@@ -25,15 +27,35 @@ namespace BookingApp.Controllers
 
         // GET: api/BAIdentityUsers/5
         [ResponseType(typeof(BAIdentityUser))]
-        public IHttpActionResult GetBAIdentityUser(string id)
+        public IHttpActionResult GetBAIdentityUser(string username)
         {
-            BAIdentityUser bAIdentityUser = db.Users.Find(id);
+
+            BAIdentityUser bAIdentityUser = db.Users.First(u => u.UserName == username);
             if (bAIdentityUser == null)
             {
                 return NotFound();
             }
 
             return Ok(bAIdentityUser);
+        }
+
+        [Route("roles/{username}")]
+        // GET: api/BAIdentityUsers/
+        [ResponseType(typeof(BAIdentityUser))]
+        public IHttpActionResult GetUserRole(string username)
+        {
+
+            BAIdentityUser user = db.Users.First(u => u.UserName == username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userStore = new UserStore<BAIdentityUser>(db);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
+            
+
+            return Ok(userManager.GetRoles(user.Id));
         }
 
         // PUT: api/BAIdentityUsers/5

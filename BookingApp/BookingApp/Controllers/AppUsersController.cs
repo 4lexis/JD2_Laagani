@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -78,14 +80,24 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
+            var userStore = new UserStore<BAIdentityUser>(db);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
 
             if (!db.Users.Any(u => u.UserName == appUser.Username))
             {
                 var user = new BAIdentityUser() { UserName = appUser.Username, Email = appUser.Email, PasswordHash = BAIdentityUser.HashPassword(appUser.Password) };
 
-                db.Users.Add(user);
+                // Create user with AppUser role
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
+
+                userManager.GetRoles(user.Id);
+
+              //  db.Users.Add(user);
                 db.SaveChanges();
+
+                return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
             }
 
 

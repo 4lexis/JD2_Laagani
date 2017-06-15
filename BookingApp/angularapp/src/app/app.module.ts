@@ -28,6 +28,8 @@ const Routes = [
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "country", component: CountryComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent}, 
 
   // otherwise redirect to home page
   {path: '**', redirectTo: ''}
@@ -41,11 +43,11 @@ const Routes = [
     HomeComponent,
     CountryComponent,
     AccommodationTypeComponent,
-    RegionComponent
-    AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    AccommodationTypeComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +55,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
-  providers: [CountryService, AccommodationTypeService, RegionService],
+  providers: [CountryService, AccommodationTypeService, RegionService, AuthGuard, AlertService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
