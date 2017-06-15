@@ -15,7 +15,7 @@ export class RegionComponent implements OnInit {
   error:string;
   region:Region = new Region();
   countries: Array<Country> = new Array<Country>();
-  selectedCnt: Country;
+  selectedCnt: Country;  
 
   constructor(private regionService: RegionService, private countryService: CountryService) 
   {                 
@@ -44,13 +44,18 @@ export class RegionComponent implements OnInit {
   getCountries(): void {
     this.countryService
         .getCountries()
-        .then(country => this.countries = country)        
+        .then(country => 
+        {
+          this.countries = country
+          this.selectedCnt = this.countries[0];
+        })
   }
 
   onSubmit(region: Region, form: NgForm) {
-    console.log(region);    
-    this.region=region;    
-    this.region.Country_Id = region.Country.Id;
+    console.log(region);
+    this.region=region;
+    this.region.Country_Id=this.selectedCnt.Id;    
+    console.log(this.region);
     this.save();
     form.reset();       
   }  
@@ -59,13 +64,19 @@ export class RegionComponent implements OnInit {
     this.regionService.create(this.region);
   }
 
- private logDropdown(id: number): void {
-   
-        this.countryService.getCountry(id).then(country => {
+ private logDropdown(id: number): void {   //zasto saljem upit kad imam na viewu
+        /*this.countryService.getCountry(id).then(country => {
           this.selectedCnt=country
           console.log(this.selectedCnt);
-      });
-    }
- 
-
+      });*/
+      for(let i=0; i<this.countries.length; i++)
+      {
+        if(this.countries[i].Id == id)
+        {
+          this.selectedCnt=this.countries[i];
+          console.log(this.selectedCnt);
+          break;
+        }
+      }
+    } 
 }
