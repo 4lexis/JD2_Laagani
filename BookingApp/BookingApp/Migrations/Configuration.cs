@@ -83,7 +83,7 @@ namespace BookingApp.Migrations
             country.Code = 123854;
             country.Id = 13;
             country.Name = "Srbija";
-            
+
 
             Place place = new Place();
             place.Id = 2;
@@ -98,7 +98,7 @@ namespace BookingApp.Migrations
             place.Region = region;
 
             context.Countries.Add(country);
-            context.Places.Add(place);            
+            context.Places.Add(place);
             context.AccommodationsTypes.Add(acctype);
             context.AppUsers.Add(user1);
 
@@ -129,7 +129,7 @@ namespace BookingApp.Migrations
 
             Room room = new Room();
             room.BedCount = 3;
-            room.Description = "DarkRoom Hehe";            
+            room.Description = "DarkRoom Hehe";
             room.PricePerNight = 23;
             room.RoomNumber = 7;
             room.Accommodation = acc;
@@ -144,15 +144,15 @@ namespace BookingApp.Migrations
             rez.AppUser = user1;
 
             context.RoomReservationss.Add(rez);
-            
+
             if (!context.Users.Any(u => u.UserName == "ja"))
-            {                    
-            var _appUser = context.AppUsers.FirstOrDefault(a => a.Email == "ja@mailinator.com");
-            var user3 = new BAIdentityUser() { Id = "ja", UserName = "ja", Email = "ja@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("ja") };
-            userManager.Create(user3);
-            userManager.AddToRole(user3.Id, "AppUser");
+            {
+                var _appUser = context.AppUsers.FirstOrDefault(a => a.Email == "ja@mailinator.com");
+                var user3 = new BAIdentityUser() { Id = "ja", UserName = "ja", Email = "ja@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("ja") };
+                userManager.Create(user3);
+                userManager.AddToRole(user3.Id, "AppUser");
             }
-            
+
         }
     }
 }

@@ -3,7 +3,9 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from "ng2-jwt";
 
-import { AppUser } from "../models/app-user";
+import { AppUser } from "../model/app-user";
+import { UserService } from "./user-service";
+import { AlertService } from "./alert-service";
  
 @Injectable()
 export class AuthService {
@@ -12,18 +14,29 @@ export class AuthService {
     token = "";
 
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http,
+        private auth: UserService,
+        private alertService: AlertService) { }
 
-    login(username: string, password: string) {
+    login(user: AppUser) {
         
-        this.http.post('http://localhost:54042/oauth/token', 'username='+username+'&password='+password+'&grant_type=password')
+        this.http.post('http://localhost:54042/oauth/token', 'username='+user.Username+'&password='+user.Password+'&grant_type=password')
             .map(res => res.json())
             .subscribe(
                 data =>  {
                     localStorage.setItem('id_token', data.access_token);
-                   localStorage.setItem("currentUsername", username);
+                    localStorage.setItem("currentUser", user.Username);
+                    this.auth.getByUsername(user.Username).subscribe(
+                        data => {
+                            this.alertService.success('Login successful', true);
+                            localStorage.setItem('currentRole', data);
+                        },
+                        error => {
+                            this.alertService.error(error);
+                        });
                 },
-                error => console.log('auth service error: ' + error)
+                error => this.alertService.error(error)
             );
     }
  
@@ -31,18 +44,8 @@ export class AuthService {
         // remove user from local storage to log user out
         //localStorage.removeItem('currentUser');
         localStorage.removeItem('id_token');
-        localStorage.removeItem('currentUsername');
-    }
-
-    register(user: AppUser) {
-        this.http.post('http://localhost:54042/register', JSON.stringify(user))
-            .map(res => res.json())
-            .subscribe(
-                data =>  {
-                    console.log("registration ok");
-                },
-                error => console.log('auth service error: ' + error)
-            );
+        localStorage.removeItem('currentRole');
+        localStorage.removeItem("currentUser");
     }
 
     loggedIn() {

@@ -299,9 +299,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706131436130_StraniKljuc.cs" />
-    <Compile Include="Migrations\201706131436130_StraniKljuc.Designer.cs">
-      <DependentUpon>201706131436130_StraniKljuc.cs</DependentUpon>
+    <Compile Include="Migrations\201706151304349_StraniKljuc.cs" />
+    <Compile Include="Migrations\201706151304349_StraniKljuc.Designer.cs">
+      <DependentUpon>201706151304349_StraniKljuc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -399,8 +399,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706131436130_StraniKljuc.resx">
-      <DependentUpon>201706131436130_StraniKljuc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706151304349_StraniKljuc.resx">
+      <DependentUpon>201706151304349_StraniKljuc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

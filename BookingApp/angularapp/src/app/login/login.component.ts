@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NgForm} from '@angular/forms';
  
 import { AlertService } from "../auth-services/index";
-import { AppUser } from "../models/app-user";
+import { AppUser } from "../model/app-user";
 
 @Component({
     selector: 'login',
@@ -31,7 +31,12 @@ export class LoginComponent implements OnInit {
     }
 
   onLogin(user: AppUser, form: NgForm) {
-    this.auth.login(user.username, user.password);
+     // console.log(this.model.Username);
+    //console.log("user: " + user.Username, " pass: " + user.Password);
+    this.auth.login(user);
     form.reset();
+
+    this.router.navigate(['/home']);
+    
   }
 }
