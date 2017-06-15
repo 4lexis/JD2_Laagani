@@ -24,6 +24,8 @@ import { RegisterComponent } from './registration/register.component';
 import {RegionComponent} from './region/region.component';
 import {RegionService} from './services/region-service.component';
 
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -49,13 +51,15 @@ const Routes = [
     LoginComponent,
     RegisterComponent,
     AlertComponent,
-    PlaceComponent
+    PlaceComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(Routes)
+    RouterModule.forRoot(Routes),
+     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
   providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService],  
   bootstrap: [AppComponent]
