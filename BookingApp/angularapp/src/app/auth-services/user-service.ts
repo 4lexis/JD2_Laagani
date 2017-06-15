@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { AppUser } from '../models/app-user';
+import { AppUser } from '../model/app-user';
 
 @Injectable()
 export class UserService {
@@ -34,7 +34,7 @@ export class UserService {
     }
 
     update(user: AppUser) {
-        return this.http.put('http://localhost:54042/api/AppUsers/' + user.id, user, this.jwt()).map((response: Response) => response.json());
+        return this.http.put('http://localhost:54042/api/AppUsers/' + user.Id, user, this.jwt()).map((response: Response) => response.json());
     }
 
     delete(id: number) {

@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from "ng2-jwt";
 
-import { AppUser } from "../models/app-user";
+import { AppUser } from "../model/app-user";
  
 @Injectable()
 export class AuthService {
@@ -14,8 +14,7 @@ export class AuthService {
 
     constructor(private http: Http) { }
 
-    login(username: string, password: string) {
-        
+    login(username: string, password: string) {        
         this.http.post('http://localhost:54042/oauth/token', 'username='+username+'&password='+password+'&grant_type=password')
             .map(res => res.json())
             .subscribe(

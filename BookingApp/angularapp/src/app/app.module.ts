@@ -13,6 +13,9 @@ import { CountryService} from './services/country-service.component';
 import { AccommodationTypeComponent} from './accommodation-type/accommodation-type.component';
 import { AccommodationTypeService} from './services/accommodation-type-service.component';
 
+import { PlaceComponent} from './place/place.component';
+import { PlaceService} from './services/place-service.component';
+
 import { AuthGuard } from './security/auth.guard';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService, AuthService, UserService } from './auth-services/index';
@@ -30,7 +33,7 @@ const Routes = [
   {path: "register", component: RegisterComponent},
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: ''},
   {path: "country", component: CountryComponent},
   {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
@@ -41,11 +44,12 @@ const Routes = [
     HomeComponent,
     CountryComponent,
     AccommodationTypeComponent,
-    RegionComponent
+    RegionComponent,
     AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    PlaceComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +57,7 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService],
-  providers: [CountryService, AccommodationTypeService, RegionService],
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService],  
   bootstrap: [AppComponent]
 })
 export class AppModule {}
