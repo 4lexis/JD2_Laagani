@@ -1,5 +1,21 @@
 <div>Region<div>
 <ul>
-    <li *ngFor="let reg of regions"> Name: {{reg.Name}} Id: {{reg.Id}} Country_Id {{reg.Country_Id}} {{reg.Country.Name}} </li> 
-    
+    <li *ngFor="let reg of regions"> Name: {{reg.Name}} Id: {{reg.Id}} Country_Id {{reg.Country_Id}} </li>    
 </ul>
+
+<h3>Add region</h3>
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel required>
+    </div>
+    <div>
+        <label> Country </label>
+        <select #select (change)="logDropdown(select.value)">
+            <option *ngFor="let cnt of countries" [value]="cnt.Id"  >{{cnt.Name}} </option>            
+        </select>        
+    </div>
+    <input type="submit">
+  </form>
+</div>

@@ -4,11 +4,6 @@ export class Country
     Code:number;
     Name:string;
 
-    constructor(Id:number, Code:number, Name:string)
-    {
-        this.Code=Code;
-        this.Id=Id;
-        this.Name=Name;
-    }
+    constructor(){}
 
 }

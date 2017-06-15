@@ -32,7 +32,9 @@ const Routes = [
   {path: "accommodation-type", component: AccommodationTypeComponent}, 
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''} 
+  {path: '**', redirectTo: ''}
+  {path: "country", component: CountryComponent},
+  {path: "accommodation-type", component: AccommodationTypeComponent},  
 ]
 
 @NgModule({
