@@ -9,7 +9,7 @@ export class UserService {
 
 
     url = "http://localhost:54042/api/AppUsers/";
-
+    urlCreate = "http://localhost:54042/api/BAIdentityUsers";
     rolesUrl = "http://localhost:54042/roles/";
 
     constructor(private http: Http) { }
@@ -27,7 +27,7 @@ export class UserService {
             });
         return ret;
          */
-        return this.http.get("http://localhost:54042/api/BAIdentityUsers", this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.url, this.jwt()).map((response: Response) => response.json());
     }
 
     

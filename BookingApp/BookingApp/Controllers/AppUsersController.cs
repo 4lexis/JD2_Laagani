@@ -81,27 +81,24 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var user = new BAIdentityUser()
+            {
+                Id = appUser.Username,
+                UserName = appUser.Username,
+                Email = appUser.Email,
+                PasswordHash = BAIdentityUser.HashPassword(appUser.Password)
+            };
+
             var userStore = new UserStore<BAIdentityUser>(db);
             var userManager = new UserManager<BAIdentityUser>(userStore);
 
-            if (!db.Users.Any(u => u.UserName == appUser.Username))
-            {
-                var user = new BAIdentityUser() { UserName = appUser.Username, Email = appUser.Email, PasswordHash = BAIdentityUser.HashPassword(appUser.Password) };
+            userManager.Create(user);
+            userManager.AddToRole(user.Id, "AppUser");
+            appUser.Role = "AppUser";
+            appUser.ResetPassword();
 
-                // Create user with AppUser role
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "AppUser");
-
-                userManager.GetRoles(user.Id);
-
-              //  db.Users.Add(user);
-                db.SaveChanges();
-
-                return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-            }
-
-
-            
+            db.AppUsers.Add(appUser);
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
         }

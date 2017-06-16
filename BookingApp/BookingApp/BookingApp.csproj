@@ -284,7 +284,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OData\OAccommodationsController.cs" />
     <Compile Include="Controllers\OData\OAccommodationTypesController.cs" />
-    <Compile Include="Controllers\OData\OAppUsersController.cs" />
     <Compile Include="Controllers\OData\OCommentsController.cs" />
     <Compile Include="Controllers\OData\OCountriesController.cs" />
     <Compile Include="Controllers\OData\OPlacesController.cs" />
@@ -299,9 +298,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706151304349_StraniKljuc.cs" />
-    <Compile Include="Migrations\201706151304349_StraniKljuc.Designer.cs">
-      <DependentUpon>201706151304349_StraniKljuc.cs</DependentUpon>
+    <Compile Include="Migrations\201706161325593_NovaBaza.cs" />
+    <Compile Include="Migrations\201706161325593_NovaBaza.Designer.cs">
+      <DependentUpon>201706161325593_NovaBaza.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -399,8 +398,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706151304349_StraniKljuc.resx">
-      <DependentUpon>201706151304349_StraniKljuc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706161325593_NovaBaza.resx">
+      <DependentUpon>201706161325593_NovaBaza.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
