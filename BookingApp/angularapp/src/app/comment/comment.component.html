@@ -1,0 +1,34 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Users</h2>
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Grade<th>
+                <th>Text</th>
+                <th>User</th>
+                <th>Accomodation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let comm of comments">
+                <td>{{ comm.Id }}</td>
+                <td>
+                    <inline-editor type="text" [(ngModel)]="comm.Grade" (onSave)="onSave(comm)" name="Grade"></inline-editor>
+                </td>
+                <td>
+                    <inline-editor type="text" [(ngModel)]="comm.Text" (onSave)="onSave(comm)" name="Text"></inline-editor>
+                </td>
+                <td>
+                    <inline-editor type="text" [(ngModel)]="comm.AppUser_Id" (onSave)="onSave(comm)" name="AppUser_Id"></inline-editor>
+                </td>
+		    <td>
+                    <inline-editor type="text" [(ngModel)]="comm.Accommodation_Id" (onSave)="onSave(comm)" name="Accommodation_Id"></inline-editor>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="removeComment(comm)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

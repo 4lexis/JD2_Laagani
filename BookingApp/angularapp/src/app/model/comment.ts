@@ -4,7 +4,7 @@ export class Comment {
     Grade: number;
     Text: string;
 
-    AppUser_Id: number;
+    AppUser_Id: string;
     Accommodation_Id: number;
     
     constructor(){}
