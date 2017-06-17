@@ -61,7 +61,6 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(user: AppUser, form: NgForm) {
-    user.Role = user.Role[0];
     console.log("new user: " + JSON.stringify(user));
     this.userService.create(user)
       .subscribe(
