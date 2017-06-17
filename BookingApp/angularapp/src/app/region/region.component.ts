@@ -61,14 +61,10 @@ export class RegionComponent implements OnInit {
   }  
 
   save(): void {
-    this.regionService.create(this.region);
+    this.regionService.create(this.region).then(()=>this.getRegions());
   }
 
- private logDropdown(id: number): void {   //zasto saljem upit kad imam na viewu
-        /*this.countryService.getCountry(id).then(country => {
-          this.selectedCnt=country
-          console.log(this.selectedCnt);
-      });*/
+ private logDropdown(id: number): void {
       for(let i=0; i<this.countries.length; i++)
       {
         if(this.countries[i].Id == id)

@@ -34,7 +34,7 @@ export class AccommodationTypeComponent implements OnInit {
   }
 
   save(): void {
-    this.accTypeService.create(this.accommodationType);    
+    this.accTypeService.create(this.accommodationType).then( ()=> this.getAccommodationTypes());    
   }
 
 }

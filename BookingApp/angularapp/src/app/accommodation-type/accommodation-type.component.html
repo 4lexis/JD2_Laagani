@@ -13,4 +13,6 @@
   </form>
 </div>
 <br/><br/>
-<app-map></app-map>
+<app-map #map ></app-map>
+<br/><br/>
+<app-accommodation [clickedLat]= "map.clickedLat" [clickedLong]="map.clickedLong" > </app-accommodation>
