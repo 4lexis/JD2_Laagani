@@ -28,12 +28,15 @@ import { AccommodationComponent} from './accommodation/accommodation.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import { RoomComponent } from './room/room.component';
+import { RoomService } from './services/room-service.component';
 
 const Routes = [
   {path: "home", component: HomeComponent},
   {path: "country", component: CountryComponent, canActivate: [AuthGuard]},
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
+  {path: "rooms", component: RoomComponent},
   {path: "register", component: RegisterComponent},
 
   // otherwise redirect to home page
@@ -55,7 +58,8 @@ const Routes = [
     AlertComponent,
     PlaceComponent,
     MapComponent,
-    AccommodationComponent
+    AccommodationComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,7 @@ const Routes = [
     RouterModule.forRoot(Routes),
      AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService, AccommodationService],  
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService, AccommodationService, RoomService],  
   bootstrap: [AppComponent]
 })
 export class AppModule {}
