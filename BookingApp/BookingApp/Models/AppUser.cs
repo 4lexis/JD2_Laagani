@@ -1,25 +1,43 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BookingApp.Models
 {
+    /// <summary>
+    /// Ovu klasu korisnika saljem na web...
+    /// </summary>
     public class AppUser
     {
+        private string id;
         private string email;
-        private int id;
-        private string password;
         private string username;
-        public List<Comment> m_Comment;
-        public List<RoomReservation> m_RoomReservations;
-        public List<Accommodation> m_Accommodation;
+        private string password;
+        public List<Comment> Comment;
+        public List<RoomReservation> RoomReservations;
+        public List<Accommodation> Accommodation;
+        private string role { get; set; }
 
         public AppUser()
         {
-            m_RoomReservations = new List<RoomReservation>();
-            m_Accommodation = new List<Accommodation>();
-            m_Comment = new List<Comment>();
+            RoomReservations = new List<RoomReservation>();
+            Accommodation = new List<Accommodation>();
+            Comment = new List<Comment>();
+            password = "unknown";
+        }
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
         }
 
         public string Email
@@ -34,15 +52,15 @@ namespace BookingApp.Models
             }
         }
 
-        public int Id
+        public string Username
         {
             get
             {
-                return id;
+                return username;
             }
             set
             {
-                id = value;
+                username = value;
             }
         }
 
@@ -58,16 +76,22 @@ namespace BookingApp.Models
             }
         }
 
-        public string Username
+
+        public string Role
         {
             get
             {
-                return username;
+                return role;
             }
             set
             {
-                username = value;
+                role = value;
             }
+        }
+
+        public void ResetPassword()
+        {
+            password = "unknown";
         }
     }
 }

@@ -6,6 +6,11 @@ import { AppUser } from '../model/app-user';
 
 @Injectable()
 export class UserService {
+
+
+    url = "http://localhost:54042/api/AppUsers/";
+    rolesUrl = "http://localhost:54042/roles/";
+
     constructor(private http: Http) { }
 
     getAll() {
@@ -21,33 +26,47 @@ export class UserService {
             });
         return ret;
          */
-        return this.http.get('http://localhost:54042/api/AppUsers', this.jwt()).map((response: Response) => response.json());
-}
+        return this.http.get(this.url, this.jwt()).map((response: Response) => response.json());
+    }
 
-    getById(id: number) {
-        return this.http.get('http://localhost:54042/api/' + id, this.jwt()).map((response: Response) => response.json());
+    
+    getAllRoles() {
+        return this.http.get(this.rolesUrl, this.jwt()).map((response: Response) => response.json());
+    }
+    
+
+
+    getRoleByUsername(username: string) {
+        return this.http.get(this.rolesUrl + username, this.jwt()).map((response: Response) => response.json());
     }
 
     create(user: AppUser) {
-        console.log("user: " + user);
-        return this.http.post('http://localhost:54042/api/AppUsers/', user, this.jwt()).map((response: Response) => response.json());
+        console.log("new user: " + JSON.stringify(user));
+        return this.http.post(this.url, user).map((response: Response) => response.json());
     }
 
     update(user: AppUser) {
-        return this.http.put('http://localhost:54042/api/AppUsers/' + user.Id, user, this.jwt()).map((response: Response) => response.json());
+        return this.http.put(this.url + user.Id, user, this.jwt()).map((response: Response) => response.json());
     }
 
-    delete(id: number) {
-        return this.http.delete('http://localhost:54042/api/AppUsers/' + id, this.jwt()).map((response: Response) => response.json());
+    delete(id: string) {
+        console.log("id: " + id);
+        return this.http.delete(this.url + id, this.jwt()).map((response: Response) => response.json());
     }
 
     // private helper methods
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUsername'));
-        if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+        let currentUser = localStorage.getItem('currentUser');
+         let token = localStorage.getItem('id_token');
+
+         //console.log("currentUser: " + currentUser);
+         //console.log("token: " + token);
+
+        if (currentUser && token) {
+            console.log("currentUser: " + currentUser);
+            let headers = new Headers({ 'Authorization': 'Bearer ' + token });
             return new RequestOptions({ headers: headers });
         }
     }

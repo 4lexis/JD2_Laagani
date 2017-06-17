@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import {InlineEditorModule} from 'ng2-inline-editor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
@@ -25,11 +26,15 @@ import {RegionComponent} from './region/region.component';
 import {RegionService} from './services/region-service.component';
 import {AccommodationService} from './services/accommodation-service.component';
 import { AccommodationComponent} from './accommodation/accommodation.component';
+import { UserComponent } from './user/user.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import { RoomComponent } from './room/room.component';
 import { RoomService } from './services/room-service.component';
+
+import { AgmCoreModule } from "@agm/core";
+import { MapComponent } from "./map/map.component";
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -38,11 +43,10 @@ const Routes = [
   {path: "login", component: LoginComponent},
   {path: "rooms", component: RoomComponent},
   {path: "register", component: RegisterComponent},
+  {path: "user", component: UserComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home page
-  {path: '**', redirectTo: ''},
-  {path: "country", component: CountryComponent},
-  {path: "accommodation-type", component: AccommodationTypeComponent},  
+  {path: '**', redirectTo: ''}
 ]
 
 @NgModule({
@@ -52,7 +56,6 @@ const Routes = [
     CountryComponent,
     AccommodationTypeComponent,
     RegionComponent,
-    AccommodationTypeComponent,
     LoginComponent,
     RegisterComponent,
     AlertComponent,
@@ -66,7 +69,8 @@ const Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
+     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
+     InlineEditorModule
   ],
   providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService, AccommodationService, RoomService],  
   bootstrap: [AppComponent]

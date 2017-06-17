@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
     }
 
   onLogin(user: AppUser, form: NgForm) {
-      debugger
-    this.auth.login(user.Username, user.Password);
-    form.reset();
+     // console.log(this.model.Username);
+    //console.log("user: " + user.Username, " pass: " + user.Password);
+        form.reset();
+    this.auth.login(user);
+  //  window.location.reload();
   }
 }

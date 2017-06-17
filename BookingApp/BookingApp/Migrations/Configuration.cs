@@ -67,23 +67,50 @@ namespace BookingApp.Migrations
                 var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin") };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Admin");
+                AppUser appUser = new AppUser();
+                appUser.Username = user.UserName;
+                appUser.Email = user.Email;
+                appUser.Role = userManager.GetRoles("admin").First();
+                context.AppUsers.Add(appUser);
+                appUser.Id = user.Id;
+            }
+
+            AppUser user1 = new AppUser();
+            AppUser user2 = new AppUser();
+
+            if (!context.Users.Any(u => u.UserName == "ja"))
+            {
+                var user3 = new BAIdentityUser() { Id = "ja", UserName = "ja", Email = "ja@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("ja") };
+                userManager.Create(user3);
+                userManager.AddToRole(user3.Id, "AppUser");
+                user1.Username = user3.UserName;
+                user1.Email = user3.Email;
+                user1.Role = userManager.GetRoles("ja").First();
+                user1.Id = user3.Id;
+            }
+
+            if (!context.Users.Any(u => u.UserName == "user1"))
+            {
+                var user3 = new BAIdentityUser() { Id = "user1", UserName = "user1", Email = "user1@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("user1") };
+                userManager.Create(user3);
+                userManager.AddToRole(user3.Id, "AppUser");
+                user2.Username = user3.UserName;
+                user2.Email = user3.Email;
+                user2.Role = userManager.GetRoles("user1").First();
+                context.AppUsers.Add(user2);
+                user2.Id = user3.Id;
             }
 
             AccommodationType acctype = new AccommodationType();
             acctype.Id = 88;
             acctype.Name = "Buras";
 
-            AppUser user1 = new AppUser();
-            user1.Email = "mail@gmail.com";
-            user1.Id = 0;
-            user1.Password = "pass";
-            user1.Username = "user";
-
+         
             Country country = new Country();
             country.Code = 123854;
             country.Id = 13;
             country.Name = "Srbija";
-            
+
 
             Place place = new Place();
             place.Id = 2;
@@ -98,7 +125,7 @@ namespace BookingApp.Migrations
             place.Region = region;
 
             context.Countries.Add(country);
-            context.Places.Add(place);            
+            context.Places.Add(place);
             context.AccommodationsTypes.Add(acctype);
             context.AppUsers.Add(user1);
 
@@ -119,6 +146,23 @@ namespace BookingApp.Migrations
             acc.AppUser = user1;
             context.Accommodations.Add(acc);
 
+            Accommodation acc2 = new Accommodation();
+            acc2.Address = "Addr";
+            acc2.Approved = true;
+            acc2.AverageGrade = 3;
+            acc2.Description = "ey";
+            acc2.Id = 16;
+            acc2.Latitude = 12.2;
+            acc2.Longitude = 23.25;
+            acc2.Name = "Hotel Park";
+            acc2.ImageURL = "url";
+            acc2.Place = place;
+            acc2.AccommodationType = acctype;
+            //acc.m_Comment.Add(new Comment());
+            //acc.m_Room.Add(new Room());
+            acc2.AppUser = user2;
+            context.Accommodations.Add(acc2);
+
             Comment comment = new Comment();
             comment.Grade = 3;
             comment.Text = "awe";
@@ -129,7 +173,7 @@ namespace BookingApp.Migrations
 
             Room room = new Room();
             room.BedCount = 3;
-            room.Description = "DarkRoom Hehe";            
+            room.Description = "DarkRoom Hehe";
             room.PricePerNight = 23;
             room.RoomNumber = 7;
             room.Accommodation = acc;
@@ -144,15 +188,7 @@ namespace BookingApp.Migrations
             rez.AppUser = user1;
 
             context.RoomReservationss.Add(rez);
-            
-            if (!context.Users.Any(u => u.UserName == "ja"))
-            {                    
-            var _appUser = context.AppUsers.FirstOrDefault(a => a.Email == "ja@mailinator.com");
-            var user3 = new BAIdentityUser() { Id = "ja", UserName = "ja", Email = "ja@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("ja") };
-            userManager.Create(user3);
-            userManager.AddToRole(user3.Id, "AppUser");
-            }
-            
+
         }
     }
 }

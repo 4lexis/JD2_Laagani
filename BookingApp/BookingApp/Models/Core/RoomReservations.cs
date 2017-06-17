@@ -24,7 +24,7 @@ namespace BookingApp.Models
         private DateTime? timestamp;
 
         [ForeignKey("AppUser")]
-        public int AppUser_Id { get; set; }
+        public string AppUser_Id { get; set; }
 
         public AppUser AppUser { get; set; }
 
