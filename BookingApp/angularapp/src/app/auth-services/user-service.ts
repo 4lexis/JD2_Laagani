@@ -9,7 +9,6 @@ export class UserService {
 
 
     url = "http://localhost:54042/api/AppUsers/";
-    urlCreate = "http://localhost:54042/api/BAIdentityUsers";
     rolesUrl = "http://localhost:54042/roles/";
 
     constructor(private http: Http) { }
@@ -42,6 +41,7 @@ export class UserService {
     }
 
     create(user: AppUser) {
+        console.log("new user: " + JSON.stringify(user));
         return this.http.post(this.url, user).map((response: Response) => response.json());
     }
 
@@ -49,7 +49,8 @@ export class UserService {
         return this.http.put(this.url + user.Id, user, this.jwt()).map((response: Response) => response.json());
     }
 
-    delete(id: number) {
+    delete(id: string) {
+        console.log("id: " + id);
         return this.http.delete(this.url + id, this.jwt()).map((response: Response) => response.json());
     }
 
@@ -60,10 +61,11 @@ export class UserService {
         let currentUser = localStorage.getItem('currentUser');
          let token = localStorage.getItem('id_token');
 
-         console.log("currentUser: " + currentUser);
-         console.log("token: " + token);
+         //console.log("currentUser: " + currentUser);
+         //console.log("token: " + token);
 
         if (currentUser && token) {
+            console.log("currentUser: " + currentUser);
             let headers = new Headers({ 'Authorization': 'Bearer ' + token });
             return new RequestOptions({ headers: headers });
         }

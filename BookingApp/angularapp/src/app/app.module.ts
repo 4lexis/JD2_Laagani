@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import {InlineEditorModule} from 'ng2-inline-editor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
@@ -60,7 +61,8 @@ const Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
+     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
+     InlineEditorModule
   ],
   providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService],  
   bootstrap: [AppComponent]

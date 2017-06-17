@@ -3,7 +3,7 @@ namespace BookingApp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NovaBaza : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace BookingApp.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Place_Id = c.Int(nullable: false),
-                        AppUser_Id = c.Int(nullable: false),
+                        AppUser_Id = c.String(maxLength: 128),
                         AccommodationType_Id = c.Int(nullable: false),
                         Address = c.String(),
                         Approved = c.Boolean(nullable: false),
@@ -26,7 +26,7 @@ namespace BookingApp.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AccommodationTypes", t => t.AccommodationType_Id, cascadeDelete: true)
-                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id)
                 .ForeignKey("dbo.Places", t => t.Place_Id, cascadeDelete: true)
                 .Index(t => t.Place_Id)
                 .Index(t => t.AppUser_Id)
@@ -45,7 +45,7 @@ namespace BookingApp.Migrations
                 "dbo.AppUsers",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Email = c.String(),
                         Username = c.String(),
                         Password = c.String(),
@@ -92,14 +92,14 @@ namespace BookingApp.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        AppUser_Id = c.Int(nullable: false),
+                        AppUser_Id = c.String(maxLength: 128),
                         Accommodation_Id = c.Int(nullable: false),
                         Grade = c.Int(nullable: false),
                         Text = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Accommodations", t => t.Accommodation_Id, cascadeDelete: false)
-                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id, cascadeDelete: false)
+                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id)
                 .Index(t => t.AppUser_Id)
                 .Index(t => t.Accommodation_Id);
             
@@ -131,15 +131,15 @@ namespace BookingApp.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        AppUser_Id = c.Int(nullable: false),
+                        AppUser_Id = c.String(maxLength: 128),
                         Room_Id = c.Int(nullable: false),
                         EndDate = c.DateTime(),
                         StartDate = c.DateTime(),
                         Timestamp = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Rooms", t => t.Room_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id)
+                .ForeignKey("dbo.Rooms", t => t.Room_Id, cascadeDelete: false)
                 .Index(t => t.AppUser_Id)
                 .Index(t => t.Room_Id);
             
@@ -155,7 +155,7 @@ namespace BookingApp.Migrations
                         RoomNumber = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Accommodations", t => t.Accommodation_Id, cascadeDelete: false)
+                .ForeignKey("dbo.Accommodations", t => t.Accommodation_Id, cascadeDelete: true)
                 .Index(t => t.Accommodation_Id);
             
             CreateTable(

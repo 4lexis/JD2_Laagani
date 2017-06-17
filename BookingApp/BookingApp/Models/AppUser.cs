@@ -11,7 +11,7 @@ namespace BookingApp.Models
     /// </summary>
     public class AppUser
     {
-        private int id;
+        private string id;
         private string email;
         private string username;
         private string password;
@@ -28,7 +28,7 @@ namespace BookingApp.Models
             password = "unknown";
         }
 
-        public int Id
+        public string Id
         {
             get
             {

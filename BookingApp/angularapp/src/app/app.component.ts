@@ -17,4 +17,8 @@ import { NgForm} from '@angular/forms';
 })
 export class AppComponent {
   title = 'BookingApp';
+
+
+  currentUser: string = localStorage.getItem("currentUser");
+
 }

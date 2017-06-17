@@ -39,7 +39,7 @@ namespace BookingApp.Controllers
 
         // PUT: api/AppUsers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAppUser(int id, AppUser appUser)
+        public IHttpActionResult PutAppUser(string id, AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
@@ -51,6 +51,17 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
+            BAIdentityUser user = db.Users.Find(id);
+            var userStore = new UserStore<BAIdentityUser>(db);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
+
+
+            string oldRole = userManager.GetRoles(id).First();
+            userManager.RemoveFromRole(id, oldRole);
+            userManager.AddToRole(user.Id, appUser.Role);
+            userManager.Update(user);
+
+            db.Entry(user).State = EntityState.Modified;
             db.Entry(appUser).State = EntityState.Modified;
 
             try
@@ -93,8 +104,8 @@ namespace BookingApp.Controllers
             var userManager = new UserManager<BAIdentityUser>(userStore);
 
             userManager.Create(user);
-            userManager.AddToRole(user.Id, "AppUser");
-            appUser.Role = "AppUser";
+            userManager.AddToRole(user.Id, appUser.Role);
+            appUser.Id = appUser.Username;
             appUser.ResetPassword();
 
             db.AppUsers.Add(appUser);
@@ -103,9 +114,10 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
         }
 
-        // DELETE: api/AppUsers/5
+        [HttpDelete]
+        // DELETE: api/AppUsers/{username}
         [ResponseType(typeof(AppUser))]
-        public IHttpActionResult DeleteAppUser(int id)
+        public IHttpActionResult DeleteAppUser(string id)
         {
             AppUser appUser = db.AppUsers.Find(id);
             if (appUser == null)
@@ -113,7 +125,10 @@ namespace BookingApp.Controllers
                 return NotFound();
             }
 
+            BAIdentityUser user = db.Users.Find(id);
+
             db.AppUsers.Remove(appUser);
+            db.Users.Remove(user);
             db.SaveChanges();
 
             return Ok(appUser);
@@ -128,7 +143,7 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AppUserExists(int id)
+        private bool AppUserExists(string id)
         {
             return db.AppUsers.Count(e => e.Id == id) > 0;
         }

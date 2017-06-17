@@ -72,6 +72,7 @@ namespace BookingApp.Migrations
                 appUser.Email = user.Email;
                 appUser.Role = userManager.GetRoles("admin").First();
                 context.AppUsers.Add(appUser);
+                appUser.Id = user.Id;
             }
 
             AppUser user1 = new AppUser();
@@ -85,7 +86,7 @@ namespace BookingApp.Migrations
                 user1.Username = user3.UserName;
                 user1.Email = user3.Email;
                 user1.Role = userManager.GetRoles("ja").First();
-               // user1.Id = user3.Id;
+                user1.Id = user3.Id;
             }
 
             if (!context.Users.Any(u => u.UserName == "user1"))
@@ -97,6 +98,7 @@ namespace BookingApp.Migrations
                 user2.Email = user3.Email;
                 user2.Role = userManager.GetRoles("user1").First();
                 context.AppUsers.Add(user2);
+                user2.Id = user3.Id;
             }
 
             AccommodationType acctype = new AccommodationType();

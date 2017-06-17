@@ -38,7 +38,7 @@ namespace BookingApp.Models
         public Place Place { get; set; }
 
         [ForeignKey("AppUser")]
-        public int AppUser_Id { get; set; }
+        public string AppUser_Id { get; set; }
 
         public AppUser AppUser { get; set; }
 

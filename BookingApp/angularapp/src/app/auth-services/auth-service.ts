@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from "ng2-jwt";
-
+import { Router } from '@angular/router';
 import { AppUser } from "../model/app-user";
 import { UserService } from "./user-service";
 import { AlertService } from "./alert-service";
@@ -17,7 +17,8 @@ export class AuthService {
     constructor(
         private http: Http,
         private auth: UserService,
-        private alertService: AlertService) { }
+        private alertService: AlertService,
+        private router: Router) { }
 
     login(user: AppUser) {
         
@@ -35,6 +36,8 @@ export class AuthService {
                         error => {
                             this.alertService.error(error);
                         });
+                    
+                    this.router.navigate(['/home']).then(() => location.reload());
                 },
                 error => this.alertService.error(error)
             );
