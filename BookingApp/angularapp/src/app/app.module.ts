@@ -24,8 +24,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './registration/register.component';
 import {RegionComponent} from './region/region.component';
 import {RegionService} from './services/region-service.component';
+import {AccommodationService} from './services/accommodation-service.component';
+import { AccommodationComponent} from './accommodation/accommodation.component';
 import { UserComponent } from './user/user.component';
 
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
+import { RoomComponent } from './room/room.component';
+import { RoomService } from './services/room-service.component';
 
 import { AgmCoreModule } from "@agm/core";
 import { MapComponent } from "./map/map.component";
@@ -35,6 +41,7 @@ const Routes = [
   {path: "country", component: CountryComponent, canActivate: [AuthGuard]},
   {path: "accommodation-type", component: AccommodationTypeComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
+  {path: "rooms", component: RoomComponent},
   {path: "register", component: RegisterComponent},
   {path: "user", component: UserComponent, canActivate: [AuthGuard]},
 
@@ -54,7 +61,8 @@ const Routes = [
     AlertComponent,
     PlaceComponent,
     MapComponent,
-    UserComponent
+    AccommodationComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +72,7 @@ const Routes = [
      AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
      InlineEditorModule
   ],
-  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService],  
+  providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, UserService, AuthService, RegionService, PlaceService, AccommodationService, RoomService],  
   bootstrap: [AppComponent]
 })
 export class AppModule {}

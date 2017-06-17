@@ -1,0 +1,39 @@
+<div>Rooms
+    <div>
+        <ul>
+            <li *ngFor="let room of rooms"> RoomNumber: {{room.RoomNumber}} BedCount: {{room.BedCount}} Acc_Id {{room.Accommodation_Id}} </li>
+        </ul>
+
+        <h3>Add room</h3>
+        <div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+                <div>
+                    <label for="RoomNumber">RoomNumber</label>
+                    <input type="number" name="RoomNumber" ngModel required>
+                </div>
+
+                <div>
+                    <label for="BedCount">BedCount</label>
+                    <input type="number" name="BedCount" ngModel required>
+                </div>
+
+                <div>
+                    <label for="Description">Description</label>
+                    <input type="text" name="Description" ngModel required>
+                </div>
+
+                <div>
+                    <label for="PricePerNight">PricePerNight</label>
+                    <input type="number" name="PricePerNight" ngModel required>
+                </div>
+                <div>
+                    <label> Accommodation </label>
+
+                    <select #select (change)="logDropdown(select.value)">            
+                        <option *ngFor="let acc of accommodations" [value]="acc.Id" >{{acc.Name}} </option>            
+                    </select>
+
+                </div>
+                <input type="submit">
+            </form>
+        </div>

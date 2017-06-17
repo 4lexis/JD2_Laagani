@@ -12,7 +12,7 @@ export class Accommodation {
     
     Place_Id: number;    
     AppUser_Id: number;    
-    AType_Id: number;
+    AccommodationType_Id: number;    
     
     constructor(){}    
 }

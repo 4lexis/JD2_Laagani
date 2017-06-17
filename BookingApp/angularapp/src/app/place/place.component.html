@@ -1,23 +1,27 @@
-<div>Place<div>
-<ul>
-    <li *ngFor="let place of places"> Name: {{place.Name}} Id: {{place.Id}} Region_Id {{place.Region_Id}} </li>    
-</ul>
+<div>Place
+    <div>
+        <ul class="list-group">
+            <li *ngFor="let place of places" class="list-group-item"> Name: {{place.Name}} Id: {{place.Id}} Region_Id {{place.Region_Id}}
 
-<h3>Add place</h3>
-<div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
-    <div>
-      <label for="Name">Name</label>
-      <input type="text" name="Name" ngModel required>
-    </div>
-    <div>
-        <label> Region </label>
-        
-        <select #select (change)="logDropdown(select.value)">            
-            <option *ngFor="let reg of regions" [value]="reg.Id" >{{reg.Name}} </option>            
-        </select>
-             
-    </div>
-    <input type="submit">
-  </form>
-</div>
+            </li>
+        </ul>
+
+        <h3>Add place</h3>
+        <div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+                <div>
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" name="Name" ngModel required>
+                </div>
+                <div>
+                    <label> Region </label>
+                    <select class="form-control" id="select" #select (change)="logDropdown(select.value)">            
+                      <option *ngFor="let reg of regions" [value]="reg.Id" >{{reg.Name}} </option>            
+                    </select>
+                </div>
+                <div>
+                    <br/>
+                    <input type="submit" class="btn btn-default">
+                </div>
+            </form>
+        </div>

@@ -1,3 +1,4 @@
+import { Accommodation } from './accommodation';
 export class Room {
 
     Id: number;
@@ -7,6 +8,7 @@ export class Room {
     RoomNumber: number;    
     
     Accommodation_Id: number;
+    Accommodation: Accommodation;
     
     constructor(){}
 }

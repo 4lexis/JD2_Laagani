@@ -36,7 +36,7 @@ export class CountryComponent implements OnInit {
   }
 
   save(): void {
-    this.countryService.create(this.singleCountry);
+    this.countryService.create(this.singleCountry).then( ()=> this.getCountries());
   }
 
   delte(country): void
