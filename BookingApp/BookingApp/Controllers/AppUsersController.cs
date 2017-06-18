@@ -51,21 +51,28 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
-            BAIdentityUser user = db.Users.Find(id);
-            var userStore = new UserStore<BAIdentityUser>(db);
-            var userManager = new UserManager<BAIdentityUser>(userStore);
-
-
-            string oldRole = userManager.GetRoles(id).First();
-            userManager.RemoveFromRole(id, oldRole);
-            userManager.AddToRole(user.Id, appUser.Role);
-            userManager.Update(user);
-
-            db.Entry(user).State = EntityState.Modified;
             db.Entry(appUser).State = EntityState.Modified;
 
             try
             {
+                db.SaveChanges();
+
+                BAIdentityUser user = db.Users.Find(id);
+                var userStore = new UserStore<BAIdentityUser>(db);
+                var userManager = new UserManager<BAIdentityUser>(userStore);
+
+
+                string oldRole = userManager.GetRoles(id).First();
+                if (oldRole != appUser.Role)
+                {
+                    userManager.RemoveFromRole(id, oldRole);
+                    userManager.AddToRole(user.Id, appUser.Role);
+                }
+                user.Email = appUser.Email;
+                user.UserName = appUser.Username;
+                userManager.Update(user);
+
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -73,10 +80,6 @@ namespace BookingApp.Controllers
                 if (!AppUserExists(id))
                 {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
                 }
             }
 

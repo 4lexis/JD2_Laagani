@@ -1,0 +1,34 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Reservations</h2>
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Timestamp</th>
+                <th>User</th>
+		    <th>Room</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let res of reservations">
+                <td>{{ res.Id }}</td>
+                <td>
+                    <inline-editor type="date" [(ngModel)]="res.StartDate" (onSave)="onSave(res)" name="StartDate"></inline-editor>
+                </td>
+                <td>
+                    <inline-editor type="date" [(ngModel)]="res.EndDate" (onSave)="onSave(res)" name="EndDate"></inline-editor>
+                </td>
+		     <td>
+                    <inline-editor type="date" [(ngModel)]="res.Timestamp" (onSave)="onSave(res)" name="Timestamp"></inline-editor>
+                </td>
+                <td>{{ res.AppUser_Id }}</td>
+		    <td>{{ res.Room_Id }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="removeReservation(res)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

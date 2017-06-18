@@ -5,7 +5,7 @@ export class RoomReservation {
     StartDate: Date;
     Timestamp: Date;
     
-    User_Id: number;
+    AppUser_Id: string;
     Room_Id: number;
 
     constructor(){}
