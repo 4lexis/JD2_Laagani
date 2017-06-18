@@ -38,7 +38,7 @@ export class UserService {
 
 
     getRoleByUsername(username: string) {
-        return this.http.get(this.rolesUrl + username, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.rolesUrl + username).map((response: Response) => response.json());
     }
 
     create(user: AppUser) {

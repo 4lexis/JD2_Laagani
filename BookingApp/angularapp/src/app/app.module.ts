@@ -36,6 +36,7 @@ import { RoomService } from './services/room-service.component';
 
 import { AgmCoreModule } from "@agm/core";
 import { MapComponent } from "./map/map.component";
+import { AccommodationDetailsComponent } from './accommodation/accommodation-details.component';
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -47,6 +48,8 @@ const Routes = [
   {path: "user", component: UserComponent, canActivate: [AuthGuard]},
   {path: "comment", component: CommentComponent},
   {path: "room-reservation", component: RoomReservationComponent},
+  {path: "accommodation", component: AccommodationComponent},
+  {path: "accommodation-details/:id", component: AccommodationDetailsComponent},
 
   // otherwise redirect to home page
   {path: '**', redirectTo: ''}
@@ -68,7 +71,8 @@ const Routes = [
     RoomComponent,
     UserComponent,
     CommentComponent,
-    RoomReservationComponent
+    RoomReservationComponent,
+    AccommodationDetailsComponent
   ],
   imports: [
     BrowserModule,
