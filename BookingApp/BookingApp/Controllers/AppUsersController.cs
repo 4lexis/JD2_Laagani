@@ -57,8 +57,11 @@ namespace BookingApp.Controllers
 
 
             string oldRole = userManager.GetRoles(id).First();
-            userManager.RemoveFromRole(id, oldRole);
-            userManager.AddToRole(user.Id, appUser.Role);
+            if (oldRole != appUser.Role)
+            {
+                userManager.RemoveFromRole(id, oldRole);
+                userManager.AddToRole(user.Id, appUser.Role);
+            }
             userManager.Update(user);
 
             db.Entry(user).State = EntityState.Modified;

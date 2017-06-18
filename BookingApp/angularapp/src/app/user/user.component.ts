@@ -48,7 +48,14 @@ export class UserComponent implements OnInit {
   }
 
   onSave(user: AppUser) {
-    user.Role = user.Role[0];
+    //console.log("role: " + JSON.stringify(user));
+    
+    // Fix user edit role value
+    // If you editing role, role is array
+    // If you editing something else, role is a single value
+    if (user.Role.length == 1)
+      user.Role = user.Role[0];
+
     this.userService.update(user)
       .subscribe(
       data => {
@@ -61,7 +68,7 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(user: AppUser, form: NgForm) {
-    console.log("new user: " + JSON.stringify(user));
+    //console.log("new user: " + JSON.stringify(user));
     this.userService.create(user)
       .subscribe(
       data => {
@@ -76,7 +83,7 @@ export class UserComponent implements OnInit {
   }
 
   removeUser(user: AppUser) {
-    console.log("removing user: " + JSON.stringify(user));
+    //console.log("removing user: " + JSON.stringify(user));
     this.userService.delete(user.Username)
       .subscribe(
       data => {
