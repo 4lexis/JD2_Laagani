@@ -16,12 +16,14 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [Route("api/Accommodations")]
         // GET: api/Accommodations
         public IQueryable<Accommodation> GetAccommodations()
         {
             return db.Accommodations;
         }
 
+        [Route("api/Accommodations/{id}")]
         // GET: api/Accommodations/5
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult GetAccommodation(int id)
@@ -33,6 +35,14 @@ namespace BookingApp.Controllers
             }
 
             return Ok(accommodation);
+        }
+
+        [Route("api/Accommodations/Rooms/{id}")]
+        // GET: api/Accommodations/Rooms
+        public IQueryable<Room> GetRooms(int id)
+        {
+            return db.Rooms.Where(r => r.Accommodation_Id == id);
+            
         }
 
         // PUT: api/Accommodations/5

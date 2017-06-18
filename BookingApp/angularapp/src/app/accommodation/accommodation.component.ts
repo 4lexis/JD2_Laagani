@@ -11,6 +11,7 @@ import { AccommodationType } from '../model/accommodation-type';
 @Component({
   selector: 'app-accommodation',
   templateUrl: './accommodation.component.html',
+  styleUrls: [ "./accommodation.css" ]
 })
 
 export class AccommodationComponent implements OnInit {

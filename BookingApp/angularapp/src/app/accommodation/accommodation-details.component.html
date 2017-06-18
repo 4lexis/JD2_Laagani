@@ -1,0 +1,31 @@
+<h2 id="name">{{ acc.Name }}</h2>
+<fieldset class="rating">
+    <p>Ocenite smeštaj:</p>
+    <input type="radio" id="star5" name="rating" class="acc-rating" value="5" /><label for="star5" title="Odlično!">5 stars</label>
+    <input type="radio" id="star4" name="rating" class="acc-rating" value="4" /><label for="star4" title="Poprilično dobro">4 stars</label>
+    <input type="radio" id="star3" name="rating" class="acc-rating" value="3" /><label for="star3" title="Dobro">3 stars</label>
+    <input type="radio" id="star2" name="rating" class="acc-rating" value="2" /><label for="star2" title="Može bolje">2 stars</label>
+    <input type="radio" id="star1" name="rating" class="acc-rating" value="1" /><label for="star1" title="Loše">1 star</label>
+</fieldset>
+<div class="images">
+    <img [src]="acc.ImageURL" />
+</div>
+<div class="acc-box">
+</div>
+<hr />
+<table class="details">
+</table>
+<div class="acc-rooms">
+    <ul>
+        <li *ngFor="let r of rooms">
+            <p>{{r.Name}}</p>
+        </li>
+    </ul>
+</div>
+<div id="comments">
+    <h4>Komentari</h4>
+    <button type="button" class="btn btn-primary" id="showReview">Napiši komentar</button>
+    <div class="writeComment" style="display: none">
+        <textarea id="commentDesc"></textarea>
+    </div>
+</div>
