@@ -13,9 +13,7 @@
         <tbody>
             <tr *ngFor="let user of users">
                 <td>{{ user.Id }}</td>
-                <td>
-                    <inline-editor type="text" [(ngModel)]="user.Username" (onSave)="onSave(user)" name="Username"></inline-editor>
-                </td>
+                <td> {{ user.Username }} </td>
                 <td>
                     <inline-editor type="text" [(ngModel)]="user.Email" (onSave)="onSave(user)" name="Email"></inline-editor>
                 </td>
@@ -32,13 +30,13 @@
     <button type="button" *ngIf="!isVisible" class="btn btn-success" (click)="toggle()">Create new user</button>
     <div *ngIf="isVisible" class="form-group">
         <h2>Enter new user data</h2>
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.value, f)" #f="ngForm" novalidate>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.value, f)" #f="ngForm" novalidate>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Username.valid }">
                 <label for="Username">Username</label>
                 <input type="text" class="form-control" name="Username" [(ngModel)]="model.Username" #Username="ngModel" required />
                 <div *ngIf="f.submitted && !Username.valid" class="help-block">Username is required</div>
             </div>
-             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Password.valid }">
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Password.valid }">
                 <label for="Password">Password</label>
                 <input type="Password" class="form-control" name="Password" [(ngModel)]="model.Password" #Password="ngModel" required />
                 <div *ngIf="f.submitted && !Password.valid" class="help-block">Password is required</div>
@@ -50,7 +48,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Role.valid }">
                 <label for="Role">Role</label>
-                <select #select  class="form-control" name="Role" [(ngModel)]="model.Role" #Role="ngModel" required  >            
+                <select #select class="form-control" name="Role" [(ngModel)]="model.Role" #Role="ngModel" required>            
                     <option *ngFor="let r of outRoles" [value]="r.value" >{{r.text}} </option>            
                 </select>
                 <div *ngIf="f.submitted && !Role.valid" class="help-block">Role is required</div>

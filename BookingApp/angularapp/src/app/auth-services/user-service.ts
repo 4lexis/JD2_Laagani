@@ -9,6 +9,7 @@ export class UserService {
 
 
     url = "http://localhost:54042/api/AppUsers/";
+    url2 = "http://localhost:54042/api/BAIdentityUsers/";
     rolesUrl = "http://localhost:54042/roles/";
 
     constructor(private http: Http) { }
