@@ -16,6 +16,8 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+
+        [Route("api/Countries")]
         // GET: api/Countries
         public IQueryable<Country> GetCountries()
         {
@@ -24,6 +26,7 @@ namespace BookingApp.Controllers
 
         // GET: api/Countries/5
         [ResponseType(typeof(Country))]
+        [Route("api/Countries/{id}")]
         public IHttpActionResult GetCountry(int id)
         {
             Country country = db.Countries.Find(id);
@@ -35,6 +38,8 @@ namespace BookingApp.Controllers
             return Ok(country);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("api/Countries/{id}")]
         // PUT: api/Countries/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCountry(int id, Country country)
@@ -70,6 +75,9 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("api/Countries", Name = "PostCountry")]
         // POST: api/Countries
         [ResponseType(typeof(Country))]
         public IHttpActionResult PostCountry(Country country)
@@ -82,9 +90,12 @@ namespace BookingApp.Controllers
             db.Countries.Add(country);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = country.Id }, country);
+            return CreatedAtRoute("PostCountry", new { id = country.Id }, country);
+            //return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("api/Countries/{id}")]
         // DELETE: api/Countries/5
         [ResponseType(typeof(Country))]
         public IHttpActionResult DeleteCountry(int id)

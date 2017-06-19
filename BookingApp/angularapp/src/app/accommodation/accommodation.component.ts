@@ -104,7 +104,7 @@ export class AccommodationComponent implements OnInit {
   {
     for(let place in this.places)
     {
-      if(this.places[place].Id = acc.Place_Id)
+      if(this.places[place].Id == acc.Place_Id)
       {
         acc.Place=this.places[place];
         break;
@@ -136,6 +136,12 @@ export class AccommodationComponent implements OnInit {
    delte(acc: Accommodation): void
   {    
     this.accService.delete(acc.Id).then(()=>this.getAccommodations());
+  }
+
+  approve(acc: Accommodation): void
+  {
+    acc.Approved=true;
+    this.accService.update(acc).then( () => this.getAccommodations());
   }
 
   private dropDownPlace(id: number): void {  

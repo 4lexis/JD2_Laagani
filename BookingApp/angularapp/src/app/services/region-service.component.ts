@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -30,7 +30,7 @@ export class RegionService {
 
   delete(id: number): Promise<void> {
     const url = `${this.regionUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.http.delete(url, this.jwt())
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
@@ -38,7 +38,7 @@ export class RegionService {
 
   create(region: Region): Promise<Region> {
     return this.http
-      .post(this.regionUrl, JSON.stringify(region), {headers: this.headers})
+      .post(this.regionUrl, JSON.stringify(region), this.jwt())
       .toPromise()
       .then(res => res.json() as Region)
       .catch(this.handleError);      
@@ -47,7 +47,7 @@ export class RegionService {
   update(region: Region): Promise<Region> {
     const url = `${this.regionUrl}/${region.Id}`;
     return this.http
-      .put(url, JSON.stringify(region), {headers: this.headers})
+      .put(url, JSON.stringify(region), this.jwt())
       .toPromise()
       .then(() => region)
       .catch(this.handleError);
@@ -56,6 +56,21 @@ export class RegionService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
+  }
+
+  private jwt() {
+    // create authorization header with jwt token
+    let currentUser = localStorage.getItem('currentUser');
+    let token = localStorage.getItem('id_token');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    //console.log("currentUser: " + currentUser);
+    //console.log("token: " + token);
+
+    if (currentUser && token) {
+      headers.append('Authorization', 'Bearer ' + token);
+      return new RequestOptions({ headers: headers });
+    }
   }
 
 }

@@ -20,5 +20,6 @@ export class AppComponent {
 
 
   currentUser: string = localStorage.getItem("currentUser");
+  currentRole: string = localStorage.getItem("currentRole");
 
 }

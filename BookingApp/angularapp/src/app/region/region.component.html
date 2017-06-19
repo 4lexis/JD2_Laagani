@@ -12,7 +12,7 @@
             <tr *ngFor="let reg of regions">
 
                 <td>
-                    <inline-editor type="text" [(ngModel)]="reg.Name" (onSave)="onEdit(cnt)" name="Name"></inline-editor>
+                    <inline-editor type="text" [(ngModel)]="reg.Name" (onSave)="onEdit(reg)" name="Name"></inline-editor>
                 </td>
                 <td>
                     <inline-editor type="select" [options]=outCnts [(ngModel)]="reg.Country_Id" value="reg.Country_Id" (onSave)="onEdit(reg)" name="CountryName">
