@@ -42,7 +42,12 @@ export class CountryComponent implements OnInit {
   delte(country): void
   {
     this.singleCountry=country;
-    this.countryService.delete(this.singleCountry.Id);    
+    this.countryService.delete(this.singleCountry.Id).then(()=>this.getCountries());
+  }
+
+  onEdit(country: Country):void
+  {
+    this.countryService.update(country).then( () => this.getCountries());
   }
 
 }

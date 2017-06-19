@@ -1,23 +1,45 @@
-<div>Region<div>
-<ul>
-    <li *ngFor="let reg of regions"> Name: {{reg.Name}} Id: {{reg.Id}} Country_Id {{reg.Country_Id}} </li>    
-</ul>
+<div class="col-md-6 col-md-offset-3">
+    <h3>Regions</h3>
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regions">
 
-<h3>Add region</h3>
-<div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+                <td>
+                    <inline-editor type="text" [(ngModel)]="reg.Name" (onSave)="onEdit(cnt)" name="Name"></inline-editor>
+                </td>
+                <td>
+                    <inline-editor type="select" [options]=outCnts [(ngModel)]="reg.Country_Id" value="reg.Country_Id" (onSave)="onEdit(reg)" name="CountryName">
+
+                    </inline-editor>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="delte(reg)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Add region</h4>
     <div>
-      <label for="Name">Name</label>
-      <input type="text" name="Name" ngModel required>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+            <div>
+                <label for="Name">Name</label>
+                <input type="text" name="Name" class="form-control" ngModel required>
+            </div>
+            <div>
+                <label> Country </label>
+
+                <select #select class="form-control" (change)="logDropdown(select.value)">            
+                        <option *ngFor="let cnt of countries" [value]="cnt.Id" >{{cnt.Name}} </option>            
+                    </select>
+            </div>
+            <input type="submit" class="btn btn-default">
+        </form>
     </div>
-    <div>
-        <label> Country </label>
-        
-        <select #select (change)="logDropdown(select.value)">            
-            <option *ngFor="let cnt of countries" [value]="cnt.Id" >{{cnt.Name}} </option>            
-        </select>
-             
-    </div>
-    <input type="submit">
-  </form>
-</div>

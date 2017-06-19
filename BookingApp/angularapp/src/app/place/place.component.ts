@@ -16,6 +16,7 @@ export class PlaceComponent implements OnInit {
   place: Place;
   regions: Region[];
   selectedRegion: Region;
+  outRegions: [{ value: number, text: string }] = [{ value: 0, text: "" }];  
 
 
   constructor(private placeService: PlaceService, private regionService: RegionService) { }
@@ -42,6 +43,11 @@ export class PlaceComponent implements OnInit {
       .then(region => {
         this.regions = region
         this.selectedRegion = this.regions[0];
+        this.outRegions.pop();
+          for(let reg in this.regions)
+          {            
+            this.outRegions.push({ value: this.regions[reg].Id, text: this.regions[reg].Name });
+          }  
       })
   }
 
@@ -56,6 +62,25 @@ export class PlaceComponent implements OnInit {
 
   save(): void {
     this.placeService.create(this.place).then(() => this.getPlaces());
+  }
+
+  onEdit(place: Place):void
+  {
+    for(let reg in this.regions)
+    {
+      if(this.regions[reg].Id = place.Region_Id)
+      {
+        place.Region=this.regions[reg];
+        break;
+      }
+    }
+    this.placeService.update(place).then( () => this.getPlaces());
+  }
+
+  delte(place: Place): void
+  {
+    this.place=place;
+    this.placeService.delete(this.place.Id).then(()=>this.getPlaces());
   }
 
   private logDropdown(id: number): void {

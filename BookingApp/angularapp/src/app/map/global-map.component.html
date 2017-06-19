@@ -1,0 +1,17 @@
+<div class="block-margin">
+    <agm-map #m [latitude]="lat" [longitude]="lng" [zoom]="15">
+        <agm-marker *ngFor="let acc of accommodations" [latitude]="acc.Latitude" [longitude]="acc.Longitude" label="">
+            <agm-info-window [latitude]="acc.Latitude" [longitude]="acc.Longitude">
+
+                <!-- U info-window stavljamo html -->
+                <span style="font-size: 16px;font-family:'Times New Roman'"> {{acc.Name}}</span>
+                <br/>
+                <span style="font-size: 16px;font-family:'Times New Roman'"> {{acc.Description}}</span>
+                <br/>
+
+                <span style="font-family:'Times New Roman'; color:black;">{{acc.Address}}</span>
+
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+</div>

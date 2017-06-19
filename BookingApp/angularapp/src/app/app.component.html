@@ -1,50 +1,51 @@
- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand active" href="/home">Home</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li><a href="/country">Country <span class="sr-only">(current)</span></a></li>
-        <li><a href="/accommodation-type">Accommodation type</a></li>
-        <li><a href="/user">Users</a></li>
-        <li><a href="/comment">Comments</a></li>
-        <li><a href="/room-reservation">Reservations</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input class="form-control" placeholder="Search" type="text">
+            <a class="navbar-brand active" href="/home">Home</a>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right" *ngIf="currentUser == null">
-        <li><a href="/login">Sing in</a></li>
-        <li><a href="/register">Registration</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" *ngIf="currentUser != null">
-        <li><a>Zdravo {{currentUser}}</a></li>
-        <li><a href="/login">Logout</a></li>
-      </ul>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li><a href="/country">Country <span class="sr-only">(current)</span></a></li>
+                <li><a href="/accommodation-type">Accommodation type</a></li>
+                <li><a href="/user">Users</a></li>
+                <li><a href="/rooms">Rooms</a></li>
+                <li><a href="/comment">Comments</a></li>
+                <li><a href="/room-reservation">Reservations</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input class="form-control" placeholder="Search" type="text">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right" *ngIf="currentUser == null">
+                <li><a href="/login">Sing in</a></li>
+                <li><a href="/register">Registration</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf="currentUser != null">
+                <li><a>Zdravo {{currentUser}}</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 <router-outlet></router-outlet>

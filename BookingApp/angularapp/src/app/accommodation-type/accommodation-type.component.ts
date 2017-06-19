@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccommodationType} from '../model/accommodation-type';
+import { AccommodationType } from '../model/accommodation-type';
 import { AccommodationTypeService }  from '../services/accommodation-type-service.component';
 import {NgForm} from '@angular/forms';
 
@@ -35,6 +35,17 @@ export class AccommodationTypeComponent implements OnInit {
 
   save(): void {
     this.accTypeService.create(this.accommodationType).then( ()=> this.getAccommodationTypes());    
+  }
+
+  delte(acctype: AccommodationType): void
+  {
+    
+    this.accTypeService.delete(acctype.Id).then(()=>this.getAccommodationTypes());
+  }
+
+  onEdit(acctype: AccommodationType):void
+  {
+    this.accTypeService.update(acctype).then( () => this.getAccommodationTypes());
   }
 
 }

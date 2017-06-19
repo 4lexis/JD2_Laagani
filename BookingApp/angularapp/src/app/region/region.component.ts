@@ -15,7 +15,8 @@ export class RegionComponent implements OnInit {
   error:string;
   region:Region = new Region();
   countries: Array<Country> = new Array<Country>();
-  selectedCnt: Country;  
+  selectedCnt: Country;
+  outCnts: [{ value: number, text: string }] = [{ value: 0, text: "" }];  
 
   constructor(private regionService: RegionService, private countryService: CountryService) 
   {                 
@@ -48,6 +49,11 @@ export class RegionComponent implements OnInit {
         {
           this.countries = country
           this.selectedCnt = this.countries[0];
+          this.outCnts.pop();
+          for(let cnt in this.countries)
+          {            
+            this.outCnts.push({ value: this.countries[cnt].Id, text: this.countries[cnt].Name });
+          }  
         })
   }
 
@@ -62,6 +68,25 @@ export class RegionComponent implements OnInit {
 
   save(): void {
     this.regionService.create(this.region).then(()=>this.getRegions());
+  }
+
+  onEdit(region: Region):void
+  {
+    for(let cnt in this.countries)
+    {
+      if(this.countries[cnt].Id = region.Country_Id)
+      {
+        region.Country=this.countries[cnt];
+        break;
+      }
+    }
+    this.regionService.update(region).then( () => this.getRegions());
+  }
+
+  delte(region: Region): void
+  {
+    this.region=region;
+    this.regionService.delete(this.region.Id).then(()=>this.getRegions());
   }
 
  private logDropdown(id: number): void {

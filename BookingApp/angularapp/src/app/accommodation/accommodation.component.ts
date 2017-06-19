@@ -7,6 +7,8 @@ import { PlaceService } from '../services/place-service.component';
 import { Place } from '../model/place';
 import { AccommodationTypeService } from '../services/accommodation-type-service.component';
 import { AccommodationType } from '../model/accommodation-type';
+import { UserService } from '../auth-services/user-service';
+import { AppUser } from '../model/app-user';
 
 @Component({
   selector: 'app-accommodation',
@@ -25,7 +27,11 @@ export class AccommodationComponent implements OnInit {
   accTypes: AccommodationType[];
   selectedAccType: AccommodationType;
 
-  constructor(private accService: AccommodationService, private placeService: PlaceService, private accTypeService: AccommodationTypeService) {
+  outPlaces: [{ value: number, text: string }] = [{ value: 0, text: "" }];
+  outAccTypes: [{ value: number, text: string }] = [{ value: 0, text: "" }];
+  users: AppUser[];
+
+  constructor(private accService: AccommodationService, private placeService: PlaceService, private accTypeService: AccommodationTypeService, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -40,6 +46,11 @@ export class AccommodationComponent implements OnInit {
       .then(place => {
         this.places = place
         this.selectedPlace = this.places[0];
+        this.outPlaces.pop();
+          for(let place in this.places)
+          {            
+            this.outPlaces.push({ value: this.places[place].Id, text: this.places[place].Name });
+          }
       })
   }
 
@@ -49,6 +60,11 @@ export class AccommodationComponent implements OnInit {
       .then(accTypes => {
         this.accTypes = accTypes
         this.selectedAccType = this.accTypes[0];
+        this.outAccTypes.pop();
+          for(let accType in this.accTypes)
+          {            
+            this.outAccTypes.push({ value: this.accTypes[accType].Id, text: this.accTypes[accType].Name });
+          }
       })
   }
 
@@ -61,7 +77,7 @@ export class AccommodationComponent implements OnInit {
   onSubmit(accommodation: Accommodation, form: NgForm) {
     accommodation.AccommodationType_Id = this.selectedAccType.Id;
     accommodation.Place_Id = this.selectedPlace.Id;
-    //accommodation.AppUser_Id = iscitacemo iz storage    
+    accommodation.AppUser_Id = localStorage.getItem("currentUser"); //iscitacemo iz storage    
     accommodation.Approved = false; //po defaultu nije approvano od strane admina
     accommodation.AverageGrade = 0; //nema avg grade dok se ne oceni    
     debugger
@@ -75,6 +91,44 @@ export class AccommodationComponent implements OnInit {
 
   save(): void {
     this.accService.create(this.accommodation).then(() => this.getAccommodations());
+  }
+
+  onEdit(acc: Accommodation):void
+  {
+    for(let place in this.places)
+    {
+      if(this.places[place].Id = acc.Place_Id)
+      {
+        acc.Place=this.places[place];
+        break;
+      }
+    }
+
+    for(let accType in this.accTypes)
+    {
+      if(this.accTypes[accType].Id = acc.AccommodationType_Id)
+      {
+        acc.AccommodationType=this.accTypes[accType];
+        break;
+      }
+    }
+
+    this.userService.getAll().map(users => this.users=users);
+    for(let user in this.users)
+    {
+      if(this.users[user].Id = acc.AccommodationType_Id)
+      {
+        acc.AppUser=this.users[user];
+        break;
+      }
+    }
+
+    this.accService.update(acc).then( () => this.getAccommodations());
+  }
+
+   delte(acc: Accommodation): void
+  {    
+    this.accService.delete(acc.Id).then(()=>this.getAccommodations());
   }
 
   private dropDownPlace(id: number): void {  
