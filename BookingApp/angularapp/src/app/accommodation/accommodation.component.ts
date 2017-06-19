@@ -84,13 +84,16 @@ export class AccommodationComponent implements OnInit {
     accommodation.AppUser_Id = localStorage.getItem("currentUser"); //iscitacemo iz storage    
     accommodation.Approved = false; //po defaultu nije approvano od strane admina
     accommodation.AverageGrade = 0; //nema avg grade dok se ne oceni    
-    debugger
+    //debugger
     if (form.valid) {
       console.log(accommodation);
       this.accommodation = accommodation;
       this.save();
       form.resetForm();
+    } else {
+      // TODO: staviti alert service msg
     }
+     
   }
 
   save(): void {
