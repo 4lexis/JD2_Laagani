@@ -13,6 +13,7 @@ import { AppUser } from '../model/app-user';
 @Component({
   selector: 'app-accommodation',
   templateUrl: './accommodation.component.html',
+  styleUrls: [ "./accommodation.css" ]
 })
 
 export class AccommodationComponent implements OnInit {
@@ -23,6 +24,8 @@ export class AccommodationComponent implements OnInit {
 
   places: Place[];
   selectedPlace: Place;
+  model: any = {};
+  currentRole: string;
 
   accTypes: AccommodationType[];
   selectedAccType: AccommodationType;
@@ -38,6 +41,7 @@ export class AccommodationComponent implements OnInit {
     this.getAccommodations();
     this.getPlaces();
     this.getAccTypes();
+    this.currentRole = localStorage.getItem("currentRole");
   }
 
   getPlaces(): void {
@@ -71,7 +75,7 @@ export class AccommodationComponent implements OnInit {
   getAccommodations(): void {
     this.accService
       .getAccommodations()
-      .then(acctypes => this.accommodations = acctypes)
+      .then(accs => this.accommodations = accs)
   }
 
   onSubmit(accommodation: Accommodation, form: NgForm) {

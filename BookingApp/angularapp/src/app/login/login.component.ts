@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     //console.log("user: " + user.Username, " pass: " + user.Password);
         form.reset();
     this.auth.login(user);
+
+
   //  window.location.reload();
   }
 }

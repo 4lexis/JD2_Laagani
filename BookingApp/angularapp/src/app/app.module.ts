@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import {InlineEditorModule} from 'ng2-inline-editor';
+import { ModalModule } from "ng2-modal";
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
@@ -37,6 +38,7 @@ import { RoomService } from './services/room-service.component';
 import { AgmCoreModule } from "@agm/core";
 import { MapComponent } from "./map/map.component";
 import { GlobalMapComponent } from "./map/global-map.component";
+import { AccommodationDetailsComponent } from './accommodation/accommodation-details.component';
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -48,6 +50,8 @@ const Routes = [
   {path: "user", component: UserComponent, canActivate: [AuthGuard]},
   {path: "comment", component: CommentComponent},
   {path: "room-reservation", component: RoomReservationComponent},
+  {path: "accommodation", component: AccommodationComponent},
+  {path: "accommodation-details/:id", component: AccommodationDetailsComponent},
   {path: "rooms", component: RoomComponent},
 
   // otherwise redirect to home page
@@ -71,7 +75,8 @@ const Routes = [
     UserComponent,
     CommentComponent,
     RoomReservationComponent,
-    GlobalMapComponent
+    GlobalMapComponent,
+    AccommodationDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes),
      AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
-     InlineEditorModule
+     InlineEditorModule,
+     ModalModule
   ],
   providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, RoomReservationService,
               UserService, AuthService, RegionService, PlaceService, AccommodationService, RoomService, CommentService],  

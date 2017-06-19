@@ -1,0 +1,75 @@
+.columns {
+    list-style: none;
+    font-size: 0px;
+    margin-left: -2.5%;
+}
+
+.columns li {
+    display: inline-block;
+    padding: 10px;
+    margin: 0 0 2.5% 2.5%;
+    background: #fff;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    font-size: 1rem;
+    vertical-align: top;
+    box-shadow: 0 5px 5px #ddd;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.columns li img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px;
+}
+
+ul.columns li h3 {
+    margin: 0 0 5px;
+}
+
+ul.columns span {
+    float: right;
+    font-size: 16px;
+}
+
+figcaption {
+    font-size: 24px;
+    text-align: left;
+}
+
+section a {
+    color: black;
+}
+
+section a:hover {
+    text-decoration: none !important;
+    font-weight: bold;
+}
+
+section li:hover {
+    font-weight: bold;
+}
+
+ul.columns li {
+    width: 30.83%;
+}
+
+figure img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+ul.columns li:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    border-radius: 5px;
+}
+
+section li span {
+    font-size: 15px;
+    text-align: right;
+}

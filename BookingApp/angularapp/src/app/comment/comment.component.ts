@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { InlineEditorComponent } from 'ng2-inline-editor';
 
 @Component({
-  selector: 'app-commnet',
+  selector: 'app-comment',
   templateUrl: './comment.component.html'
 })
 

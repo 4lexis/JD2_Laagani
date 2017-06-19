@@ -290,6 +290,7 @@
     <Compile Include="Controllers\OData\ORegionsController.cs" />
     <Compile Include="Controllers\OData\ORoomReservationsController.cs" />
     <Compile Include="Controllers\OData\ORoomsController.cs" />
+    <Compile Include="Controllers\OData\oTestRoomsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\RoomReservationsController.cs" />
