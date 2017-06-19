@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,7 +9,6 @@ import { Room } from '../model/room';
 @Injectable()
 export class AccommodationService {
 
-  private headers = new Headers({ 'Content-Type': 'application/json' });
   private accommodationUrl = 'http://localhost:54042/api/Accommodations';  // URL to web api
 
   constructor(private http: Http) { }
@@ -30,7 +29,7 @@ export class AccommodationService {
   }
 
   getRoomsOfAccommodation(id: number): Promise<Room[]> {
-    const url = `${this.accommodationUrl+"/Rooms"}/${id}`;
+    const url = `${this.accommodationUrl + "/Rooms"}/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Room[])
@@ -39,14 +38,14 @@ export class AccommodationService {
 
   delete(id: number): Promise<void> {
     const url = `${this.accommodationUrl}/${id}`;
-    return this.http.delete(url, { headers: this.headers })
+    return this.http.delete(url, this.jwt())
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
   }
 
   create(accommodation: Accommodation): Promise<Accommodation> {
-    return this.http.post(this.accommodationUrl, JSON.stringify(accommodation), { headers: this.headers })
+    return this.http.post(this.accommodationUrl, JSON.stringify(accommodation), this.jwt())
       .toPromise()
       .then(res => res.json() as Accommodation)
       .catch(this.handleError);
@@ -55,7 +54,7 @@ export class AccommodationService {
   update(accommodation: Accommodation): Promise<Accommodation> {
     const url = `${this.accommodationUrl}/${accommodation.Id}`;
     return this.http
-      .put(url, JSON.stringify(accommodation), { headers: this.headers })
+      .put(url, JSON.stringify(accommodation), this.jwt())
       .toPromise()
       .then(() => accommodation)
       .catch(this.handleError);
@@ -66,4 +65,20 @@ export class AccommodationService {
     return Promise.reject(error.message || error);
   }
 
+  // private helper methods
+
+  private jwt() {
+    // create authorization header with jwt token
+    let currentUser = localStorage.getItem('currentUser');
+    let token = localStorage.getItem('id_token');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    //console.log("currentUser: " + currentUser);
+    //console.log("token: " + token);
+
+    if (currentUser && token) {
+      headers.append('Authorization', 'Bearer ' + token );
+      return new RequestOptions({ headers: headers });
+    }
+  }
 }

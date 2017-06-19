@@ -1,4 +1,5 @@
-<section>
+<div>
+    <button type="button" *ngIf="currentRole == 'Manager'" class="btn btn-success" (click)="createModal.open()">Create new accommodation</button>
     <ul class="columns">
         <li *ngFor="let acc of accommodations">
             <a href="/accommodation-details/{{acc.Id}}">
@@ -9,4 +10,58 @@
             <span>{{ acc.AverageGrade }}</span>
         </li>
     </ul>
-</section>
+
+
+    <!-- modal (table) for create new accommodation -->
+    <modal #createModal>
+        <modal-header>
+            <h4 class="modal-title">I'm a modal!</h4>
+        </modal-header>
+        <modal-content>
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.value, f)" #f="ngForm">
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !BadCount.valid }">
+                    <input type="number" min="1" class="form-control" name="BadCount" [(ngModel)]="model.BadCount" #BadCount="ngModel" placeholder="Bed count" required />
+                    <div [hidden]="BadCount.valid || BadCount.pristine" class="alert alert-danger">
+                        Bad count is not valid
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Description.valid }">
+                    <textarea class="form-control" rows="4" cols="50" name="Description" [(ngModel)]="model.Description" #Description="ngModel" placeholder="Description" required>
+                </textarea>
+                    <div [hidden]="Description.valid || Description.pristine" class="alert alert-danger">
+                        Description is not valid
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PricePerNight.valid }">
+                    <input type="number" min="1" class="form-control" name="PricePerNight" [(ngModel)]="model.PricePerNight" #PricePerNight="ngModel" placeholder="Price per night" required />
+                    <div [hidden]="PricePerNight.valid || PricePerNight.pristine" class="alert alert-danger">
+                        Price per night is not valid
+                    </div>
+                </div>
+                <div class="form-group" min="1" [ngClass]="{ 'has-error': f.submitted && !RoomNumber.valid }">
+                    <input type="number" class="form-control" name="RoomNumber" [(ngModel)]="model.RoomNumber" #RoomNumber="ngModel" placeholder="Number of rooms" required />
+                    <div [hidden]="RoomNumber.valid || RoomNumber.pristine" class="alert alert-danger">
+                        Number of rooms is not valid
+                    </div>
+                </div>
+                <div class="form-group" min="1" [ngClass]="{ 'has-error': f.submitted && !Place_Id.valid }">
+                    <label> Select place </label>
+                    <select #p (change)="dropDownPlace(p.value)" class="form-control" name="Place_Id" [(ngModel)]="model.Place_Id" #Place_Id="ngModel" placeholder="" required>            
+                        <option *ngFor="let place of places" [value]="place.Id" >{{place.Name}} </option>            
+                    </select>
+                    <div [hidden]="Place_Id.valid || Place_Id.pristine" class="alert alert-danger">
+                        Place is not valid
+                    </div>
+                </div>
+
+
+
+                <div class="form-group buttons">
+                    <button type="button" class="btn btn-default" (click)="createModal.close()">Odustani</button>
+                    <button type="submit" class="btn btn-primary">Potvrdi</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for user reservation -->
+</div>

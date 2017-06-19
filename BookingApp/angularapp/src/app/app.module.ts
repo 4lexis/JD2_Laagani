@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import {InlineEditorModule} from 'ng2-inline-editor';
+import { ModalModule } from "ng2-modal";
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
@@ -80,7 +81,8 @@ const Routes = [
     HttpModule,
     RouterModule.forRoot(Routes),
      AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
-     InlineEditorModule
+     InlineEditorModule,
+     ModalModule
   ],
   providers: [CountryService, AccommodationTypeService, AuthGuard, AlertService, RoomReservationService,
               UserService, AuthService, RegionService, PlaceService, AccommodationService, RoomService, CommentService],  
