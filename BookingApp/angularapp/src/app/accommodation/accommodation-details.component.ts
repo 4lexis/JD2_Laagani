@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { Accommodation } from '../model/accommodation';
 import { AccommodationService } from '../services/accommodation-service.component';
