@@ -33,20 +33,39 @@
                     <td>{{r.PricePerNight}}</td>
                     <td>{{r.RoomNumber}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger" (click)="reservationModal.open(); getRoom(r.Id)"><span class="glyphicon glyphicon-trash"></span>Reservation</button>
+                        <button type="button" class="btn btn-danger" (click)="reservationModal.open(); getRoom(r.Id)"><span class="glyphicon glyphicon-check"></span>Reservation</button>
                     </td>
                 </tr>
         </table>
     </div>
     <hr />
-    <div id="comments">
-        <h3>Comments</h3>
-        <button type="button" class="btn btn-primary" id="showReview">Write comment</button>
-        <div class="writeComment" style="display: none">
-            <textarea id="commentDesc"></textarea>
-        </div>
-    </div>
+    <button type="button" class="btn btn-primary" (click)="writeCommentModal.open()">Write comment</button>
+    <app-comment #comment></app-comment>
 
+    <!-- modal (table) for create comment -->
+    <modal #writeCommentModal>
+        <modal-header>
+            <h4 class="modal-title">Post comment:</h4>
+        </modal-header>
+        <modal-content>
+            <form name="form" (ngSubmit)="f.form.valid && submitComment(f.value, f)" #f="ngForm" novalidate>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Text.valid }">
+                    <input type="textarea" class="form-control" placeholder="Text:" name="Text" [(ngModel)]="model.Text" #Text="ngModel" required />
+                    <div *ngIf="f.submitted && !Text.valid" class="help-block">Text is required</div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Password.valid }">
+                    <input type="number" min="1" max="5" placeholder="Grade" class="form-control" name="Grade" [(ngModel)]="model.Grade" #Grade="ngModel" required />
+                    <div *ngIf="f.submitted && !Grade.valid" class="help-block">Grade is required</div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="btn btn-default" (click)="writeCommentModal.close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for comment -->
 
     <!-- modal (table) for create new accommodation type -->
     <modal #reservationModal>
