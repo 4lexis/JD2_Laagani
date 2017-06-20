@@ -61,7 +61,7 @@
                 </td>
 
                 <td>
-                    <button type="button" class="btn btn-success" (click)="delte(acc)">Approve</button>
+                    <button *ngIf="acc.Approved == false" type="button" class="btn btn-success" (click)="approve(acc)">Approve</button>
                 </td>
             </tr>
         </tbody>
@@ -72,7 +72,7 @@
     <button type="button" class="btn btn-success" (click)="createTypeModal.open()">Create new accommodation type</button>
 </div>
 <!-- MANAGER & USER PAGE -->
-<div>
+<div *ngIf="currentRole == 'Manager' || currentRole=='AppUser'">
     <ul class="columns">
         <li *ngFor="let acc of accommodations">
             <a href="/accommodation-details/{{acc.Id}}">

@@ -1,23 +1,23 @@
-import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import {Country} from '../model/country';
+import { Country } from '../model/country';
 
 @Injectable()
 export class CountryService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({ 'Content-Type': 'application/json' });
   private countryUrl = 'http://localhost:54042/api/Countries';  // URL to web api
 
   constructor(private http: Http) { }
 
   getCountries(): Promise<Country[]> {
     return this.http.get(this.countryUrl)
-               .toPromise()
-               .then(response => response.json() as Country[])
-               .catch(this.handleError);
+      .toPromise()
+      .then(response => response.json() as Country[])
+      .catch(this.handleError);
   }
 
   getCountry(id: number): Promise<Country> {
@@ -30,7 +30,7 @@ export class CountryService {
 
   delete(id: number): Promise<void> {
     const url = `${this.countryUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.http.delete(url, this.jwt())
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
@@ -38,16 +38,16 @@ export class CountryService {
 
   create(country: Country): Promise<Country> {
     return this.http
-      .post(this.countryUrl, JSON.stringify(country), {headers: this.headers})
+      .post(this.countryUrl, JSON.stringify(country), this.jwt())
       .toPromise()
-      .then(res => res.json() as Country)
-      .catch(this.handleError);      
+      .then((res => res.json() as Country))
+      .catch(this.handleError);
   }
 
   update(country: Country): Promise<Country> {
     const url = `${this.countryUrl}/${country.Id}`;
     return this.http
-      .put(url, JSON.stringify(country), {headers: this.headers})
+      .put(url, JSON.stringify(country), this.jwt())
       .toPromise()
       .then(() => country)
       .catch(this.handleError);
@@ -58,4 +58,18 @@ export class CountryService {
     return Promise.reject(error.message || error);
   }
 
+  private jwt() {
+    // create authorization header with jwt token
+    let currentUser = localStorage.getItem('currentUser');
+    let token = localStorage.getItem('id_token');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    //console.log("currentUser: " + currentUser);
+    //console.log("token: " + token);
+
+    if (currentUser && token) {
+      headers.append('Authorization', 'Bearer ' + token);
+      return new RequestOptions({ headers: headers });
+    }
+  }
 }

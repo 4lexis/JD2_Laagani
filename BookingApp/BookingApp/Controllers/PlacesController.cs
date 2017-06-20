@@ -16,12 +16,14 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [Route("api/Places")]
         // GET: api/Places
         public IQueryable<Place> GetPlaces()
         {
             return db.Places;
         }
 
+        [Route("api/Places/{id}")]
         // GET: api/Places/5
         [ResponseType(typeof(Place))]
         public IHttpActionResult GetPlace(int id)
@@ -35,6 +37,8 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("api/Places/{id}")]
         // PUT: api/Places/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPlace(int id, Place place)
@@ -70,6 +74,8 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("api/Places", Name ="PostPlace")]
         // POST: api/Places
         [ResponseType(typeof(Place))]
         public IHttpActionResult PostPlace(Place place)
@@ -82,9 +88,11 @@ namespace BookingApp.Controllers
             db.Places.Add(place);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = place.Id }, place);
+            return CreatedAtRoute("PostPlace", new { id = place.Id }, place);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("api/Places/{id}")]
         // DELETE: api/Places/5
         [ResponseType(typeof(Place))]
         public IHttpActionResult DeletePlace(int id)
