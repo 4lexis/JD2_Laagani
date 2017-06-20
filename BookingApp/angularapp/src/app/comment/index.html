@@ -1,0 +1,53 @@
+<div class="comments">
+    <div class="user-info" *ngFor="let c of comments">
+        <span>{{c.AppUser_Id}}</span>
+        <div class="user-comment">
+            <span class="user-rating">{{c.Grade}}</span>
+            <p class="user-text" id="text-{c.Id}">{{c.Text}}</p>
+        </div>
+        <div class="buttons">
+            <button type="button" *ngIf="c.AppUser_Id == currentUser" class="btn btn-danger" (click)="removeCommentModal.open(); getComment(c)"><span class="glyphicon glyphicon-trash "></span></button>
+            <button type="button" *ngIf="c.AppUser_Id == currentUser" class="btn btn-success" (click)="editCommentModal.open(); getComment(c)"><span class="glyphicon glyphicon-edit "></span></button>
+            <button type="button" *ngIf="currentRole == 'Admin'" class="btn btn-danger" (click)="removeCommentModal.open(); getComment(c)"><span class="glyphicon glyphicon-trash "></span></button>
+        </div>
+    </div>
+
+    <!-- modal (table) for remove comment -->
+    <modal #removeCommentModal>
+        <modal-header>
+            <h4 class="modal-title">Are you sure you want to remove comment?</h4>
+        </modal-header>
+        <modal-content>
+            <form #f="ngForm" (ngSubmit)="removeComment()">
+                <div class="form-group">
+                    <textarea name="text" [(ngModel)]="currentComment.Text"></textarea>
+                </div>
+                <div class="form-group buttons">
+                    <button type="submit" class="btn btn-danger form-control">Yes</button>
+                    <button type="button" (click)="dropComment(); removeCommentModal.close()" class="btn btn-success form-control">No</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for remove comment -->
+
+    <!-- modal (table) for edit comment -->
+    <modal #editCommentModal>
+        <modal-header>
+            <h4 class="modal-title">Edit comment:</h4>
+        </modal-header>
+        <modal-content>
+            <form #f="ngForm" (ngSubmit)="editComment()">
+                <div class="form-group">
+                    <textarea name="text" [(ngModel)]="currentComment.Text"></textarea>
+                </div>
+                <div class="form-group buttons">
+                    <button type="button" class="btn btn-default" (click)="dropComment(); editCommentModal.close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm edit</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for edit comment -->
+
+</div>

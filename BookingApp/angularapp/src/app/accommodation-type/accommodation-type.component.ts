@@ -26,11 +26,11 @@ export class AccommodationTypeComponent implements OnInit {
         .then(acctypes => this.accommodationTypes = acctypes)        
   }
 
-  onSubmit(accommodationType: AccommodationType, form: NgForm) {
+  onSubmit(accommodationType: AccommodationType) {
+    //debugger
     console.log(accommodationType);
     this.accommodationType=accommodationType;
-    this.save();
-    form.reset();    
+    this.save();  
   }
 
   save(): void {

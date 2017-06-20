@@ -23,6 +23,7 @@ namespace BookingApp.Models
         private int id;
         private int pricePerNight;
         private int roomNumber;
+        private bool free;
 
         public List<RoomReservation> m_RoomReservations;
 
@@ -34,6 +35,18 @@ namespace BookingApp.Models
         public Room()
         {
             m_RoomReservations = new List<RoomReservation>();
+        }
+
+        public bool Free
+        {
+            get
+            {
+                return free;
+            }
+            set
+            {
+                free = value;
+            }
         }
 
         public int BedCount

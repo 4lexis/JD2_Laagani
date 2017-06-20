@@ -79,6 +79,11 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            Room room = db.Rooms.First(r => r.Id == roomReservations.Room_Id);
+            room.Free = false;
+
+            db.Entry(room).State = EntityState.Modified;
+        
             db.RoomReservationss.Add(roomReservations);
             db.SaveChanges();
 

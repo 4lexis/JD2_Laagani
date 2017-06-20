@@ -1,7 +1,7 @@
 <div class="col-md-6 col-md-offset-3">
     <h2 id="name">{{ acc.Name }}</h2>
     <fieldset class="rating">
-        <p>Ocenite smeštaj:</p>
+        <p>Rate accommodation:</p>
         <input type="radio" id="star5" name="rating" class="acc-rating" value="5" /><label for="star5" title="Odlično!">5 stars</label>
         <input type="radio" id="star4" name="rating" class="acc-rating" value="4" /><label for="star4" title="Poprilično dobro">4 stars</label>
         <input type="radio" id="star3" name="rating" class="acc-rating" value="3" /><label for="star3" title="Dobro">3 stars</label>
@@ -20,10 +20,11 @@
         <h3>Rooms</h3>
         <table class="table table-striped table-hover">
             <thead>
-                <th>Bed count</th>
+                <th>Number of beds</th>
                 <th>Description</th>
                 <th>Price per night</th>
-                <th>Number of rooms</th>
+                <th>Room number</th>
+                <th>Action</th>
             </thead>
             <tbody>
                 <tr *ngFor="let r of rooms">
@@ -31,15 +32,61 @@
                     <td>{{r.Description}}</td>
                     <td>{{r.PricePerNight}}</td>
                     <td>{{r.RoomNumber}}</td>
+                    <td>
+                        <button type="button" [disabled]="!r.Free" class="btn btn-danger" (click)="reservationModal.open(); getRoom(r.Id)"><span class="glyphicon glyphicon-check"></span>Reservation</button>
+                    </td>
                 </tr>
         </table>
     </div>
     <hr />
-    <div id="comments">
-        <h3>Komentari</h3>
-        <button type="button" class="btn btn-primary" id="showReview">Napiši komentar</button>
-        <div class="writeComment" style="display: none">
-            <textarea id="commentDesc"></textarea>
-        </div>
-    </div>
+    <button type="button" class="btn btn-primary" (click)="writeCommentModal.open()">Write comment</button>
+    <app-comment #comment></app-comment>
+
+    <!-- modal (table) for create comment -->
+    <modal #writeCommentModal>
+        <modal-header>
+            <h4 class="modal-title">Post comment:</h4>
+        </modal-header>
+        <modal-content>
+            <form name="form" (ngSubmit)="f.form.valid && submitComment(f.value, f)" #f="ngForm" novalidate>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Text.valid }">
+                    <input type="textarea" class="form-control" placeholder="Text:" name="Text" [(ngModel)]="model.Text" #Text="ngModel" required />
+                    <div *ngIf="f.submitted && !Text.valid" class="help-block">Text is required</div>
+                </div>
+                <div class="form-group">
+                    <input type="number" min="1" max="5" placeholder="Grade" class="form-control" name="Grade" [(ngModel)]="model.Grade" #Grade="ngModel" required />
+                    <div *ngIf="f.submitted && !Grade.valid" class="help-block">Grade is required</div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="btn btn-default" (click)="writeCommentModal.close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for comment -->
+
+    <!-- modal (table) for create new accommodation type -->
+    <modal #reservationModal>
+        <modal-header>
+            <h4 class="modal-title">Room reservation:</h4>
+        </modal-header>
+        <modal-content>
+            <form #f="ngForm" (ngSubmit)="onReservation(f)">
+                <div class="form-group">
+                    <my-date-picker name="StartDate" [selDate]="selectedDate" (dateChanged)="onDateChanged($event, 0)" [options]="myDatePickerOptions" required></my-date-picker>
+                </div>
+                <div class="form-group">
+                    <my-date-picker name="EndDate" [selDate]="selectedDate" (dateChanged)="onDateChanged($event, 1)" [options]="myDatePickerOptions" required></my-date-picker>
+                </div>
+                <div class="form-group buttons">
+                    <button type="button" class="btn btn-default" (click)="reservationModal.close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Book it</button>
+                </div>
+            </form>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for user reservation type -->
+
 </div>
