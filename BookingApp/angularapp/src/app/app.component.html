@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <li *ngIf="currentRole == 'Admin'"><a href="/country">Country <span class="sr-only">(current)</span></a></li>
                 <li><a href="/accommodation-type">Accommodation type</a></li>
-                <li><a href="/user">Users</a></li>
+                <li *ngIf="currentRole == 'Admin'"><a href="/user">Users</a></li>
                 <li><a href="/rooms">Rooms</a></li>
                 <li><a href="/comment">Comments</a></li>
                 <li><a href="/accommodation">Accommodation</a></li>

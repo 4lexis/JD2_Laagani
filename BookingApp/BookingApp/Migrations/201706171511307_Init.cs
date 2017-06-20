@@ -50,6 +50,7 @@ namespace BookingApp.Migrations
                         Username = c.String(),
                         Password = c.String(),
                         Role = c.String(),
+                        //Banned=c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

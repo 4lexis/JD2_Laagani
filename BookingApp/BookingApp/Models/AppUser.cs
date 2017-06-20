@@ -28,6 +28,8 @@ namespace BookingApp.Models
             password = "unknown";
         }
 
+        public bool Banned { get; set; }
+
         public string Id
         {
             get

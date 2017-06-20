@@ -7,7 +7,8 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Action</th>
+                <th>Banned</th>
+                <th colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +22,14 @@
                     <inline-editor type="select" [(ngModel)]="user.Role" [options]="outRoles" value="user.Role" (onSave)="onSave(user)" name="Role"></inline-editor>
                 </td>
                 <td>
+                    {{user.Banned}}
+                </td>
+                <td *ngIf="user.Role !='Admin'">
                     <button type="button" class="btn btn-danger" (click)="removeUser(user)">Remove</button>
+                </td>
+                <td *ngIf="user.Role !='Admin'">
+                    <button *ngIf="user.Banned == false" type="button" class="btn btn-danger" (click)="ban(user)">Ban</button>
+                    <button *ngIf="user.Banned == true" type="button" class="btn btn-success" (click)="unban(user)">Unban</button>
                 </td>
             </tr>
         </tbody>

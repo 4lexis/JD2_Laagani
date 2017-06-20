@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Country} from '../model/country';
 import { CountryService }  from '../services/country-service.component';
 import {NgForm} from '@angular/forms';
+import { FilterPipe } from '../filter/pipe';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'app-country',

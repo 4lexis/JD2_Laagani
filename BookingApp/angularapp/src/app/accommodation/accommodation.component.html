@@ -68,6 +68,8 @@
     </table>
 </div>
 <button type="button" *ngIf="currentRole == 'Manager'" class="btn btn-success" (click)="createModal.open()">Create new accommodation</button>
+
+
 <!-- MANAGER & USER PAGE -->
 <div *ngIf="currentRole == 'Manager' || currentRole=='AppUser'">
     <ul class="columns">

@@ -30,11 +30,11 @@ export class UserService {
         return this.http.get(this.url, this.jwt()).map((response: Response) => response.json());
     }
 
-    
+
     getAllRoles() {
         return this.http.get(this.rolesUrl, this.jwt()).map((response: Response) => response.json());
     }
-    
+
 
 
     getRoleByUsername(username: string) {
@@ -46,7 +46,7 @@ export class UserService {
         return this.http.post(this.url, user).map((response: Response) => response.json());
     }
 
-    update(user: AppUser) {
+    update(user: AppUser) {        
         return this.http.put(this.url + user.Id, user, this.jwt()).map((response: Response) => response.json());
     }
 
@@ -60,15 +60,13 @@ export class UserService {
     private jwt() {
         // create authorization header with jwt token
         let currentUser = localStorage.getItem('currentUser');
-         let token = localStorage.getItem('id_token');
-
-         //console.log("currentUser: " + currentUser);
-         //console.log("token: " + token);
+        let token = localStorage.getItem('id_token');
+        let headers = new Headers({ 'Content-Type': 'application/json' });
 
         if (currentUser && token) {
-            console.log("currentUser: " + currentUser);
-            let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+            headers.append('Authorization', 'Bearer ' + token);
             return new RequestOptions({ headers: headers });
         }
+
     }
 }

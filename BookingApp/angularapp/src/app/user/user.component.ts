@@ -99,5 +99,26 @@ export class UserComponent implements OnInit {
     this.isVisible = !this.isVisible;
   }
 
+  ban(user: AppUser)
+  {
+    if (user.Role.length == 1)
+    {
+      user.Role = user.Role[0];
+    }
+    
+    user.Banned=true;
+    this.userService.update(user).subscribe(()=> this.getUsers());
+  }
+
+  unban(user: AppUser): void
+  {
+    if (user.Role.length == 1)
+    {
+      user.Role = user.Role[0];
+    }
+    user.Banned=false;
+    this.userService.update(user).subscribe(()=> this.getUsers());
+  }
+
 
 }

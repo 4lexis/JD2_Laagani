@@ -37,6 +37,7 @@ namespace BookingApp.Controllers
             return Ok(appUser);
         }
 
+        [Authorize(Roles = "Admin")]
         // PUT: api/AppUsers/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppUser(string id, AppUser appUser)
@@ -118,6 +119,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         // DELETE: api/AppUsers/{username}
         [ResponseType(typeof(AppUser))]
         public IHttpActionResult DeleteAppUser(string id)

@@ -5,6 +5,7 @@ export class AppUser {
     Password: string;
     Username: string;    
     Role: string;
+    Banned: boolean;
 
     constructor() {}
 }

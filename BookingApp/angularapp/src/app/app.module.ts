@@ -39,6 +39,8 @@ import { AgmCoreModule } from "@agm/core";
 import { MapComponent } from "./map/map.component";
 import { GlobalMapComponent } from "./map/global-map.component";
 import { AccommodationDetailsComponent } from './accommodation/accommodation-details.component';
+import { FilterPipe } from './filter/pipe';
+
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -76,7 +78,8 @@ const Routes = [
     CommentComponent,
     RoomReservationComponent,
     GlobalMapComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

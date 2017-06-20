@@ -77,6 +77,8 @@ namespace BookingApp.Migrations
 
             AppUser user1 = new AppUser();
             AppUser user2 = new AppUser();
+            AppUser mng = new AppUser();
+            AppUser bmng = new AppUser();
 
             if (!context.Users.Any(u => u.UserName == "ja"))
             {
@@ -87,6 +89,7 @@ namespace BookingApp.Migrations
                 user1.Email = user3.Email;
                 user1.Role = userManager.GetRoles("ja").First();
                 user1.Id = user3.Id;
+                user1.Banned = false;
             }
 
             if (!context.Users.Any(u => u.UserName == "user1"))
@@ -99,7 +102,35 @@ namespace BookingApp.Migrations
                 user2.Role = userManager.GetRoles("user1").First();
                 context.AppUsers.Add(user2);
                 user2.Id = user3.Id;
+                user2.Banned = false;
             }
+
+            if (!context.Users.Any(u => u.UserName == "mng"))
+            {
+                var Mng = new BAIdentityUser() { Id = "mng", UserName = "mng", Email = "mng@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("mng") };
+                userManager.Create(Mng);
+                userManager.AddToRole(Mng.Id, "Manager");
+                mng.Username = Mng.UserName;
+                mng.Email = Mng.Email;
+                mng.Role = userManager.GetRoles("mng").First();
+                mng.Id = Mng.Id;
+                mng.Banned = false;
+            }
+
+            if(!context.Users.Any(u => u.UserName == "bmng"))
+            {
+                var Mng = new BAIdentityUser() { Id = "bmng", UserName = "bmng", Email = "bmng@mailinator.com", PasswordHash = BAIdentityUser.HashPassword("bmng") };
+                userManager.Create(Mng);
+                userManager.AddToRole(Mng.Id, "Manager");
+                bmng.Username = Mng.UserName;
+                bmng.Email = Mng.Email;
+                bmng.Role = userManager.GetRoles("bmng").First();
+                bmng.Id = Mng.Id;
+                bmng.Banned = true;
+            }
+
+            context.AppUsers.Add(mng);
+            context.AppUsers.Add(bmng);
 
             AccommodationType acctype = new AccommodationType();
             acctype.Id = 88;
