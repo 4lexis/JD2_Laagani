@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -20,5 +20,5 @@ export class AppComponent {
 
 
   currentUser: string = localStorage.getItem("currentUser");
-
+  currentRole: string = localStorage.getItem("currentRole");
 }

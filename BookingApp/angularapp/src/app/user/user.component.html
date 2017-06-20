@@ -21,7 +21,7 @@
                     <inline-editor type="select" [(ngModel)]="user.Role" [options]="outRoles" value="user.Role" (onSave)="onSave(user)" name="Role"></inline-editor>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" (click)="removeUser(user)">Remove</button>
+                    <button type="button" class="btn btn-danger" (click)="removeUser(user)"><span class="glyphicon glyphicon-trash"></span>Remove</button>
                 </td>
             </tr>
         </tbody>
