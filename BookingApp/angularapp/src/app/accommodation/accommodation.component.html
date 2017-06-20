@@ -67,7 +67,10 @@
         </tbody>
     </table>
 </div>
-<button type="button" *ngIf="currentRole == 'Manager'" class="btn btn-success" (click)="createModal.open()">Create new accommodation</button>
+<div class="manager-buttons" *ngIf="currentRole == 'Manager'">
+    <button type="button" class="btn btn-success" (click)="createAccModal.open()">Create new accommodation</button>
+    <button type="button" class="btn btn-success" (click)="createTypeModal.open()">Create new accommodation type</button>
+</div>
 <!-- MANAGER & USER PAGE -->
 <div *ngIf="currentRole == 'Manager' || currentRole=='AppUser'">
     <ul class="columns">
@@ -82,48 +85,72 @@
     </ul>
 
     <!-- modal (table) for create new accommodation -->
-    <modal #createModal>
+    <modal #createAccModal>
         <modal-header>
             <h4 class="modal-title">Enter Accommodation data:</h4>
         </modal-header>
         <modal-content>
             <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
-                <div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Name.valid }">
                     <input type="text" class="form-control" placeholder="Name" name="Name" ngModel required />
                 </div>
-                <div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Description.valid }">
                     <input type="textarea" class="form-control" placeholder="Description" name="Description" ngModel required />
                 </div>
-                <div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Address.valid }">
                     <input type="text" class="form-control" placeholder="Address" name="Address" ngModel required />
                 </div>
-                <div>
-                    <input type="number" class="form-control" placeholder="Latitude" name="Latitude" [ngModel]="clickedLat" required />
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Latitude.valid }">
+                    <input type="number" disabled class="form-control" placeholder="Latitude" name="Latitude" [ngModel]="map.clickedLat" required />
                 </div>
-                <div>
-                    <input type="number" class="form-control" placeholder="Longitude" name="Longitude" [ngModel]="clickedLong" required />
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Longitude.valid }">
+                    <input type="number" disabled class="form-control" placeholder="Longitude" name="Longitude" [ngModel]="map.clickedLong" required />
                 </div>
-                <div>
-                    <input type="text" class="form-control" placeholder="ImageURL" name="ImageURL" ngModel required />
-                </div>
-                <div>
+                <div class="form-group">
                     <label> Select Place </label>
                     <select #p (change)="dropDownPlace(p.value)" class="form-control">            
                         <option *ngFor="let place of places" [value]="place.Id" >{{place.Name}} </option>            
                     </select>
                 </div>
-                <div>
+                <div class="form-group">
                     <label> Select Type </label>
                     <select #at (change)="dropDownAccType(at.value)" class="form-control">            
                         <option *ngFor="let accType of accTypes" [value]="accType.Id" >{{accType.Name}} </option>            
                     </select>
                 </div>
                 <div class="form-group buttons">
-                    <button type="button" class="btn btn-default" (click)="createModal.close()">Odustani</button>
+                    <button type="button" class="btn btn-default" (click)="createAccModal.close()">Odustani</button>
                     <button type="submit" class="btn btn-primary">Potvrdi</button>
+                    <button type="button" class="btn btn-success" (click)="selectLocation.open()">Izaberi lokaciju</button>
                 </div>
             </form>
         </modal-content>
     </modal>
     <!-- end modal (table) for user reservation -->
+
+    <!-- modal (table) for create new accommodation type -->
+    <modal #createTypeModal>
+        <modal-header>
+            <h4 class="modal-title">Enter Accommodation type data:</h4>
+        </modal-header>
+        <modal-content>
+            <app-accommodation-type #accType></app-accommodation-type>
+        </modal-content>
+    </modal>
+    <!-- end modal (table) for user reservation type -->
+
+    <!-- modal (table) for location -->
+    <modal #selectLocation>
+        <modal-header>
+            <h4 class="modal-title">Select location on map:</h4>
+        </modal-header>
+        <modal-content>
+            <app-map #map></app-map>
+        </modal-content>
+        <modal-footer>
+            <button type="button" class="btn btn-default" (click)="selectLocation.close()">U redu</button>
+        </modal-footer>
+    </modal>
+    <!-- end modal (table) for location -->
+
 </div>

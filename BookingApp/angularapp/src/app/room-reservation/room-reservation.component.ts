@@ -46,7 +46,8 @@ export class RoomReservationComponent implements OnInit {
       });
   }
 
-  onSubmit(res: RoomReservation, form: NgForm) {
+
+  onReservation(res: RoomReservation) {
     console.log("new reservation: " + JSON.stringify(res));
     this.roomReservation.post(res)
       .subscribe(
@@ -57,7 +58,6 @@ export class RoomReservationComponent implements OnInit {
       error => {
         this.alertService.error(error);
       });
-    form.reset();
     this.isVisible = false;
   }
 
