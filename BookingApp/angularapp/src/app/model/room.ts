@@ -6,6 +6,7 @@ export class Room {
     Description: string;    
     PricePerNight: number;
     RoomNumber: number;    
+    Free: boolean;
     
     Accommodation_Id: number;
     Accommodation: Accommodation;

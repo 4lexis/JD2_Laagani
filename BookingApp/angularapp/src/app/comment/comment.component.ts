@@ -54,6 +54,7 @@ export class CommentComponent implements OnInit {
     //console.log("new comment: " + JSON.stringify(comm));
     
     if (form.valid) {
+    
       this.commentService.post(comm)
         .subscribe(
         data => {
